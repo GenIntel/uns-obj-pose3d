@@ -1,0 +1,20 @@
+# @package _global_
+
+method:
+  nemo:
+    #    inference:
+    #      pre_rendered: False
+    #      sample:
+    #        method: epnp3d2d # epnp3d2d uniform
+    #        depth_from_box: False
+    #      refine:
+    #        enabled: True
+    #        dims_detached: [ ] # 0-5, transl: 0, 1, 2, rot: 3, 4, 5
+    # checkpoint: ${platform.path_exps}/01-25_23-03-50_Pascal3D_NeMo_gaussian_slurm/nemo.ckpt
+    bank_feats_normalize: True
+    bank_feats_distribution: 'gaussian' # 'von-mises-fisher', 'gaussian'
+    train:
+      T: 0.035
+    model:
+      head:
+        normalize: False

@@ -1,0 +1,6 @@
+# @package _global_
+defaults:
+  - /ablations/architecture/_default
+  - override /methods/model@method.nemo.model: resnet50_frozen
+
+ablation_name_architecture: 'backbone_resnet'

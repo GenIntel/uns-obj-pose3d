@@ -1,0 +1,6 @@
+# @package _global_
+defaults:
+  - override /methods/optimizer@method.nemo.train.optimizer: sgd
+  - override /methods/scheduler@method.nemo.train.scheduler: cos_annealing
+
+ablation_name: optim_sgd_plus_cosannealing_plus_temp1

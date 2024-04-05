@@ -1,0 +1,12 @@
+
+link: local
+path_home: /home/sommerl
+path_logs: /home/sommerl
+path_od3d: /scratch/sommerl/od3d
+path_datasets: /scratch/sommerl/datasets
+path_exps: /scratch/sommerl/exps
+#path_datasets: /misc/lmbraid19/sommerl/datasets
+#path_exps: /misc/lmbraid19/sommerl/exps
+path_cudas: /scratch/sommerl/cudas
+url_od3d: git@github.com:Generative-Vision-Robust-Learning/od3d.git
+

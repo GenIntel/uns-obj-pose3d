@@ -1,0 +1,6 @@
+# @package _global_
+
+
+mesh_type: 'alphauniform500' # 'alphawrap500' 'alpha500' 'convex500', 'voxel500' 'poisson500', 'alpha500'
+aligned_name: 'aligned_N_${mesh_type}_dinov2s_filtered/${co3d_refs.ref_name}'
+

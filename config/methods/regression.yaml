@@ -1,0 +1,84 @@
+defaults:
+  - optimizer@train.optimizer: adam
+  - scheduler@train.scheduler: multistep
+  - model@model: dinov2_frozen_mlp6d
+
+name: regression
+class_name: Regression
+
+#model:
+#  backbone:
+#    class_name: ResNet
+#    layers_returned: [4, 3, 2] # always start with deepest layer...
+#  head:
+#    class_name: ResNet
+#    conv_blocks:
+#      out_dims: [2048]
+#      strides: [1]
+#    fully_connected:
+#      out_dim: 3 # None means that there is no linear layer
+#    normalize: False
+
+train:
+  early_stopping: True
+  split: random # 'random' 'sequences_separated' 'seqences_shared'
+  dataloader:
+    num_workers: 4
+    batch_size: 12
+    pin_memory: True
+
+  val: True
+  transform:
+    transforms:
+      - class_name: RandomCenterZoom3D
+        apply_txtr: False
+        config: ${texture_dataset}
+        W: 512
+        H: 512
+        scale_min: 0.5
+        scale_max: 2.0
+        center_rel_shift_xy_min:
+          - -0.
+          - -0.
+        center_rel_shift_xy_max:
+          - +0.
+          - +0.
+      - class_name: RGB_Random
+
+  epochs_to_next_test: 1
+  epochs: 40
+  val_fraction: 0.01
+  batch_accumulate_to_next_step: 2
+  T: 0.07
+
+test:
+    transform:
+        class_name: CenterZoom3D
+        W: 512
+        H: 512
+        scale: 1.
+        center_rel_shift_xy:
+          - -0.
+          - -0.
+
+    dataloader:
+        num_workers: 4
+        batch_size: 4
+        pin_memory: True
+    
+    visualize:
+      count_best: 3
+      count_worst: 3
+      count_rand: 1
+      modalities:
+        - 'verts_ncds_in_rgb'
+        - 'net_feats_nearest_verts'
+        - 'sim_pxl'
+        - 'samples'
+      samples_scores: True
+      samples_sorted: True
+      live: False
+
+
+inference:
+    live: False

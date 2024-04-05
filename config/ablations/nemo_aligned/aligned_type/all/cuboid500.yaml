@@ -1,0 +1,6 @@
+# @package _global_
+
+
+mesh_type: 'cuboid500' # 'alphawrap500' 'alpha500' 'convex500', 'voxel500' 'poisson500', 'alpha500'
+aligned_name: 'aligned_N_alpha500_dinov2s/${co3d_refs.ref_name}'
+

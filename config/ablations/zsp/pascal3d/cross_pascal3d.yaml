@@ -1,0 +1,20 @@
+# @package _global_
+defaults:
+  - /ablations/zsp/_cross_pascal3d_objectnet3d
+
+ablation_name_zsp: cross_pascal3d
+ablation_name: $ablation_name_zsp
+
+test_datasets:
+  pascal3d:
+    subset_fraction: 0.3
+    skip: False
+    categories: ${categories}
+    modalities: ${modalities_pascal3d_objectnet3d}
+  objectnet3d:
+    skip: True
+  co3d:
+    skip: True
+
+train: True
+test: True

@@ -1,0 +1,46 @@
+# @package _global_
+defaults:
+  - override /datasets@train_datasets.labeled: co3d_no_zsp_5s_labeled_ref # co3d_5s_no_zsp_labeled co3d_50s_no_zsp co3dv1_50s_no_zsp co3dv1_10s_zsp_unlabeled co3d_3s_no_zsp
+  - override /datasets@train_datasets.src: co3d_no_zsp_5s_labeled_ref # co3d_5s_no_zsp_labeled co3d_50s_no_zsp co3dv1_50s_no_zsp co3dv1_10s_zsp_unlabeled co3d_3s_no_zsp
+  - override /datasets@val_datasets.main:
+  - override /datasets@test_datasets.co3d: co3d_no_zsp_5s_labeled_ref # co3d_5s_no_zsp_labeled co3d_50s_no_zsp co3dv1_10s_zsp_labeled co3d_10s_test, co3d_test
+
+ablation_name_nemo3d_align: src_5s_ref_5s
+ablation_name: $ablation_name_nemo3d_align_zsp
+
+
+categories:
+  - bicycle
+  - truck
+  - train
+  - teddybear
+  - car
+  - bus
+  - motorcycle
+  - keyboard
+  - handbag
+  - remote
+  - airplane
+  - toilet
+  - hairdryer
+  - mouse
+  - toaster
+  - hydrant
+  - chair
+  - laptop
+  - book
+  - backpack
+  - cellphone # from cellphone on, no zsp categories
+  - microwave
+  - bench
+  - bottle
+  - couch
+  - cup
+  - suitcase
+  - tv
+
+method:
+  nemo:
+    gt_cam_tform_obj_source: 'labeled'  #  # 'zsp_labeled' 'labeled' 'droid_slam_aligned' 'droid_slam' 'zsp_labeled
+    aligned_name: 'latest_5s_to_5s'
+

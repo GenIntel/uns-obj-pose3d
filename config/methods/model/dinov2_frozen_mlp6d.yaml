@@ -1,0 +1,30 @@
+backbone:
+  class_name: DINOv2
+  hub_repo: 'facebookresearch/dinov2' # 'facebookresearch/dino:main', 'facebookresearch/dinov2'
+  hub_model: 'dinov2_vits14' # dino_vits8, dino_vitb8, dino_vits16, dino_vitb16, dinov2_vits14, dinov2_vitb14, dinov2_vitl14, dinov2_vitg14
+  downsample_rate: 16 # 8, 14, 16,
+  weights: 'default' # 'default' 'none'
+  freeze: True
+  layers_returned: [ 0 ] # always start with depest layer...
+
+#head:
+#  class_name: ViT
+#  blocks:
+#    dim: 128
+#    depth: 2
+#    num_heads: 4 # not dim must be devisiable by num_heads
+#  fully_connected:
+#    out_dim: # None means that there is no linear layer
+#  normalize: True
+
+head:
+  class_name: ResNet
+  block_type: 'bottleneck' # 'bottleneck', 'basic'
+  pad_zero: False
+  conv_blocks:
+    out_dims: [ 512, 512, 128 ]
+    strides: [ 1, 1, 1 ]
+    pre_upsampling: [1., 1., 2.]
+  fully_connected:
+    out_dim: 6 # None means that there is no linear layer
+  normalize: False

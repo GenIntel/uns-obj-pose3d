@@ -1,0 +1,32 @@
+# @package _global_
+defaults:
+  - /ablations/nemo3d_align@: src_5s_ref_5s
+
+train_datasets:
+  labeled:
+    sequences_require_mesh: False # True
+    sequences_require_pcl: True # True
+    sequences_require_gt_pose: False
+
+    mesh_name: ${mesh_name}
+    preprocess:
+      mesh:
+        enabled: True
+  src:
+    sequences_require_mesh: False # True
+    sequences_require_pcl: True # True
+    sequences_require_gt_pose: False
+
+    mesh_name: ${mesh_name}
+    preprocess:
+      mesh:
+        enabled: True
+test_datasets:
+  co3d:
+    sequences_require_mesh: False # True
+    sequences_require_pcl: True # True
+    sequences_require_gt_pose: False
+    mesh_name: ${mesh_name}
+    preprocess:
+      mesh:
+        enabled: True

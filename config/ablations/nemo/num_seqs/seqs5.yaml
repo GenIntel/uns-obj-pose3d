@@ -1,0 +1,13 @@
+# @package _global_
+defaults:
+  - /ablations/nemo/num_seqs/_default
+
+ablation_name_nemo_num_seqs: 'seqs5_epochs20'
+
+train_sequences_count_max_per_category: 5
+
+method:
+  nemo:
+    train:
+      early_stopping: False
+      epochs: 20

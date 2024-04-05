@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - /ablations/regression/dim/_default
+
+ablation_name_regression_dim: 'rot6d'
+
+method:
+  regression:
+    model:
+      head:
+        fully_connected:
+          out_dim: 6 # None means that there is no linear layer

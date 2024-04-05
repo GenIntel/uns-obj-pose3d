@@ -1,0 +1,68 @@
+defaults:
+  #- co3d
+  #- co3d_no_zsp_50s_unlabeled
+  - co3d_no_zsp_5s_labeled_ref
+  - _self_
+
+name: co3d_no_zsp_aligned_visual
+
+sequences_require_gt_pose: True
+
+tform_obj_type: 'aligned_N_alpha500_dinov2b_ref/r0' # 'label3d_cuboid' 'aligned_N_alpha500_dinov2b/r0'
+mesh_type: 'alpha500' # 'cuboid500' 'convex500', 'voxel500' 'poisson500', 'alpha500', 'cuboid1000' 'alphawrap500'
+mesh_feats_type: 'M_dinov2_vitb14_frozen_base_no_norm_T_centerzoom512_R_acc' # dinov2_vitb14_frozen_base_no_norm M_dinov2_frozen_base_T_centerzoom512_R_acc, M_nemo_old_T_centerzoom512_R_acc 'R_acc' # 'R_avg', 'R_avg_norm'
+
+sequences_count_max_per_category: 5 # 16
+frames_count_max_per_sequence: 3 # 5
+
+preprocess:
+  mesh:
+    enabled: True
+    override: False
+
+#modalities:
+#    - 'size'
+#    - 'category'
+#    - 'category_id'
+#    - 'cam_intr4x4'
+#    - 'cam_tform4x4_obj'
+#    - 'rays_center3d'
+#    - 'category'
+#    - 'rgb'
+#    - 'rgb_mask'
+#    - 'mask'
+#    - 'sequence_name_unique'
+#    - 'sequence'
+#    - 'mesh'
+# laptop/122_14254_27531
+
+categories:
+#  - bicycle
+#  - laptop
+#  - truck
+#  - train
+#  - teddybear
+#  - car
+#  - bus
+#  - motorcycle
+#  - keyboard
+#  - handbag
+  - remote
+#  - airplane
+#  - toilet
+#  - hairdryer
+  - mouse
+#  - toaster
+#  - hydrant
+#  - chair
+#  - laptop
+#  - book
+#  - backpack
+#  - cellphone # from cellphone on, no zsp categories
+#  - microwave
+#  - bench
+#  - bottle
+#  - couch
+  - cup
+#  - suitcase
+#  - tv

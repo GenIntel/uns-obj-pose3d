@@ -1,0 +1,57 @@
+defaults:
+  - nemo
+  - override model@model: dinov2_frozen_base
+
+
+class_name: NeMo_Align3D
+
+
+num_noise: 0
+
+
+#checkpoint: ${platform.path_exps}/08-07_10-06-17_CO3D_NeMo_uniform_train_co3d_3s_slurm/nemo.ckpt
+#checkpoint: ${platform.path_exps}/08-07_14-10-07_CO3D_NeMo_train_co3d_3s_split_seq_separated_slurm/nemo.ckpt
+#checkpoint: ${platform.path_exps}/08-08_10-27-13_CO3D_NeMo_aug_color_dist_center_slurm/nemo.ckpt
+#checkpoint: ${platform.path_exps}/08-08_17-27-08_CO3D_NeMo_uniform_train_co3d_3s_slurm/nemo.ckpt
+#checkpoint: ${platform.path_exps}/08-14_18-14-10_CO3D_NeMo_split_train_co3d_3s_val_seqs_separated_slurm/nemo.ckpt
+
+#multiview:
+#  type: single # single multiview multiview_mean_se3
+#  batch_size: 4
+
+train:
+  transform:
+    class_name: SequentialTransform
+    transforms:
+      - class_name: RandomCenterZoom3D
+        apply_txtr: False
+        config: ${texture_dataset}
+        W: 512
+        H: 512
+        scale_min: 1.
+        scale_max: 1.
+        center_rel_shift_xy_min:
+          - -0.
+          - -0.
+        center_rel_shift_xy_max:
+          - +0.
+          - +0.
+      - class_name: RGB_Random
+#    random_color: True
+#    random_center_zoom3d:
+#      apply_txtr: False
+#      config: ${texture_dataset}
+#      W: 512
+#      H: 512
+#      scale_min: 1.
+#      scale_max: 1.
+#      center_rel_shift_xy_min:
+#        - -0.
+#        - -0.
+#      center_rel_shift_xy_max:
+#        - +0.
+#        - +0.
+
+  val: True
+  epochs: 100
+

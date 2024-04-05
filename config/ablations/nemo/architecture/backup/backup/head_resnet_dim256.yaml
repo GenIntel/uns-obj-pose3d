@@ -1,0 +1,11 @@
+# @package _global_
+defaults:
+  - /ablations/architecture/_default
+
+ablation_name_architecture: 'head_resnet_pad_zero'
+
+method:
+  nemo:
+    model:
+      head:
+        pad_zero: True

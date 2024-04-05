@@ -1,0 +1,17 @@
+# @package _global_
+defaults:
+  - /ablations/nemo/inference/_default
+
+ablation_name_nemo_inference: 'grad_max_0101_lr004'
+
+
+method:
+  nemo:
+    inference:
+      refine:
+        dims_grad_max: [ 0.1, 0.1, 0.1, 0.1, 0.1, 0.1 ]
+      optimizer:
+        beta0: 0.4
+        beta1: 0.6
+        lr: 4e-2 # 5e-3 5e-2
+        epochs: 30 # 30

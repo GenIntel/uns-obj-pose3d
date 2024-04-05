@@ -1,0 +1,1 @@
+from od3d.methods.nemo_classification.method import NeMo_Classification

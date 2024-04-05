@@ -1,0 +1,5 @@
+# @package _global_
+
+train_datasets:
+  labeled:
+    path_cuboids: '${.path_preprocess}/mesh/cuboid1000' # 250 500 1000

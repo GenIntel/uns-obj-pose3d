@@ -1,0 +1,5 @@
+defaults:
+  - dino_vits8_frozen_base
+
+head:
+  normalize: False

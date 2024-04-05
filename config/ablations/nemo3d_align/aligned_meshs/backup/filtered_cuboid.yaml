@@ -1,0 +1,6 @@
+# @package _global_
+defaults:
+  - /ablations/nemo3d_align/aligned_meshs/_default
+
+ablation_name_nemo3d_align_aligned_meshs: filtered_cuboid
+aligned_name_suffix: '_filtered'

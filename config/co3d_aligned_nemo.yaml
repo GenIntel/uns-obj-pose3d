@@ -1,0 +1,216 @@
+defaults:
+  - logger: wandb
+  - methods@method.nemo: nemo
+  - methods/dataset@method.nemo: co3d
+  - datasets@train_datasets.labeled: co3d_no_zsp_50s_aligned # co3d_no_zsp_50s_aligned
+  - datasets@train_datasets.unlabeled: co3d_no_zsp_5s_labeled_ref # co3d_no_zsp_50s_unlabeled
+  - datasets@val_datasets.main: co3d_no_zsp_5s_labeled_ref
+  - datasets@val_datasets.co3d_zsp: co3dv1_zsp_10s
+  - datasets@val_datasets.pascal3d: pascal3d_val
+  - datasets@val_datasets.objectnet3d: objectnet3d_val
+  - datasets@test_datasets.co3d: co3d_no_zsp_5s_labeled_ref
+  - datasets@test_datasets.co3d_zsp: co3dv1_zsp_10s
+  - datasets@test_datasets.pascal3d: pascal3d_test
+  - datasets@test_datasets.objectnet3d: objectnet3d_test
+  - datasets@texture_dataset: dtd
+  - datasets/co3d_refs@co3d_refs: r0
+  - platform@platform_local: local
+  - platform: local
+  - _self_
+
+mesh_type: 'alpha500'
+aligned_name: 'aligned_N_${mesh_type}_dinov2s/${co3d_refs.ref_name}'
+# mesh_type_used: 'alphauniform250'
+
+test_subset_fraction: 1.
+val_subset_fraction: 0.05
+
+train: True
+test: True
+checkpoint: # ${platform.path_exps}/__LAST_RUN__/nemo.ckpt # 03-20_15-51-46_CO3D_NeMo_bicycle_slurm # note: not rfpath automatic now /nemo.ckpt
+
+train_sequences_count_max_per_category: 50
+
+categories:
+  - bicycle
+  - truck
+  - train
+  - teddybear
+  - car
+  - bus
+  - motorcycle
+  - keyboard
+  - handbag
+  - remote
+  - airplane
+  - toilet
+  - hairdryer
+  - mouse
+  - toaster
+  - hydrant
+  - chair
+  - laptop
+  - book
+  - backpack
+  - cellphone # from cellphone on, no zsp categories
+  - microwave
+  - bench
+  - bottle
+  - couch
+  - cup
+  - suitcase
+  - tv
+
+metrics:
+  - metricA
+  - metricB
+
+
+method:
+  nemo:
+    checkpoint: ${checkpoint}
+    model:
+      head:
+        normalize: True
+    train:
+      T: 0.07
+      early_stopping: False
+      epochs: 10
+      dataloader:
+        num_workers: 4
+        batch_size: 12
+      transform:
+        class_name: SequentialTransform
+        transforms:
+          - class_name: RandomCenterZoom3D
+            apply_txtr: False
+            config: ${texture_dataset}
+            W: 512
+            H: 512
+            scale_with_mask: 1.
+            scale_selection: 'shorter' # 'shorter' 'larger' 'separate'
+            scale_min: 0.8
+            scale_max: 1.2
+            center_rel_shift_xy_min:
+              - -0.
+              - -0.
+            center_rel_shift_xy_max:
+              - +0.
+              - +0.
+          - class_name: RGB_Random
+    test:
+      transform:
+        class_name: CenterZoom3D
+        W: 512
+        H: 512
+        scale:
+        scale_with_mask: 1.
+        center_rel_shift_xy:
+          - -0.
+          - -0.
+
+    categories: ${categories}
+    path_meshes_tform: ${train_datasets.labeled.path_preprocess}/tform_obj/label3d_cuboid/meta_mask/meta
+    path_meshes: ${train_datasets.labeled.path_preprocess}/mesh/${mesh_type}/meta_mask/meta
+    fpaths_meshes:
+      bicycle: ${..path_meshes}/bicycle/${co3d_refs.bicycle}/mesh.ply
+      truck: ${..path_meshes}/toytruck/${co3d_refs.toytruck}/mesh.ply
+      train: ${..path_meshes}/toytrain/${co3d_refs.toytrain}/mesh.ply
+      teddybear: ${..path_meshes}/teddybear/${co3d_refs.teddybear}/mesh.ply
+      car: ${..path_meshes}/car/${co3d_refs.car}/mesh.ply
+      bus: ${..path_meshes}/toybus/${co3d_refs.toybus}/mesh.ply
+      motorcycle: ${..path_meshes}/motorcycle/${co3d_refs.motorcycle}/mesh.ply
+      keyboard: ${..path_meshes}/keyboard/${co3d_refs.keyboard}/mesh.ply
+      handbag: ${..path_meshes}/handbag/${co3d_refs.handbag}/mesh.ply
+      remote: ${..path_meshes}/remote/${co3d_refs.remote}/mesh.ply
+      airplane: ${..path_meshes}/toyplane/${co3d_refs.toyplane}/mesh.ply
+      toilet: ${..path_meshes}/toilet/${co3d_refs.toilet}/mesh.ply
+      hairdryer: ${..path_meshes}/hairdryer/${co3d_refs.hairdryer}/mesh.ply
+      mouse: ${..path_meshes}/mouse/${co3d_refs.mouse}/mesh.ply
+      toaster: ${..path_meshes}/toaster/${co3d_refs.toaster}/mesh.ply
+      hydrant: ${..path_meshes}/hydrant/${co3d_refs.hydrant}/mesh.ply
+      chair: ${..path_meshes}/chair/${co3d_refs.chair}/mesh.ply
+      laptop: ${..path_meshes}/laptop/${co3d_refs.laptop}/mesh.ply
+      book: ${..path_meshes}/book/${co3d_refs.book}/mesh.ply
+      backpack: ${..path_meshes}/backpack/${co3d_refs.backpack}/mesh.ply
+      cellphone: ${..path_meshes}/cellphone/${co3d_refs.cellphone}/mesh.ply
+      microwave: ${..path_meshes}/microwave/${co3d_refs.microwave}/mesh.ply
+      bench: ${..path_meshes}/bench/${co3d_refs.bench}/mesh.ply
+      bottle: ${..path_meshes}/bottle/${co3d_refs.bottle}/mesh.ply
+      couch: ${..path_meshes}/couch/${co3d_refs.couch}/mesh.ply
+      cup: ${..path_meshes}/cup/${co3d_refs.cup}/mesh.ply
+      suitcase: ${..path_meshes}/suitcase/${co3d_refs.suitcase}/mesh.ply
+      tv: ${..path_meshes}/tv/${co3d_refs.tv}/mesh.ply
+
+    fpaths_meshes_tform_obj:
+      bicycle: ${..path_meshes_tform}/bicycle/${co3d_refs.bicycle}/tform_obj.pt
+      truck: ${..path_meshes_tform}/toytruck/${co3d_refs.toytruck}/tform_obj.pt
+      train: ${..path_meshes_tform}/toytrain/${co3d_refs.toytrain}/tform_obj.pt
+      teddybear: ${..path_meshes_tform}/teddybear/${co3d_refs.teddybear}/tform_obj.pt
+      car: ${..path_meshes_tform}/car/${co3d_refs.car}/tform_obj.pt
+      bus: ${..path_meshes_tform}/toybus/${co3d_refs.toybus}/tform_obj.pt
+      motorcycle: ${..path_meshes_tform}/motorcycle/${co3d_refs.motorcycle}/tform_obj.pt
+      keyboard: ${..path_meshes_tform}/keyboard/${co3d_refs.keyboard}/tform_obj.pt
+      handbag: ${..path_meshes_tform}/handbag/${co3d_refs.handbag}/tform_obj.pt
+      remote: ${..path_meshes_tform}/remote/${co3d_refs.remote}/tform_obj.pt
+      airplane: ${..path_meshes_tform}/toyplane/${co3d_refs.toyplane}/tform_obj.pt
+      toilet: ${..path_meshes_tform}/toilet/${co3d_refs.toilet}/tform_obj.pt
+      hairdryer: ${..path_meshes_tform}/hairdryer/${co3d_refs.hairdryer}/tform_obj.pt
+      mouse: ${..path_meshes_tform}/mouse/${co3d_refs.mouse}/tform_obj.pt
+      toaster: ${..path_meshes_tform}/toaster/${co3d_refs.toaster}/tform_obj.pt
+      hydrant: ${..path_meshes_tform}/hydrant/${co3d_refs.hydrant}/tform_obj.pt
+      chair: ${..path_meshes_tform}/chair/${co3d_refs.chair}/tform_obj.pt
+      laptop: ${..path_meshes_tform}/laptop/${co3d_refs.laptop}/tform_obj.pt
+      book: ${..path_meshes_tform}/book/${co3d_refs.book}/tform_obj.pt
+      backpack: ${..path_meshes_tform}/backpack/${co3d_refs.backpack}/tform_obj.pt
+      cellphone: ${..path_meshes_tform}/cellphone/${co3d_refs.cellphone}/tform_obj.pt
+      microwave: ${..path_meshes_tform}/microwave/${co3d_refs.microwave}/tform_obj.pt
+      bench: ${..path_meshes_tform}/bench/${co3d_refs.bench}/tform_obj.pt
+      bottle: ${..path_meshes_tform}/bottle/${co3d_refs.bottle}/tform_obj.pt
+      couch: ${..path_meshes_tform}/couch/${co3d_refs.couch}/tform_obj.pt
+      cup: ${..path_meshes_tform}/cup/${co3d_refs.cup}/tform_obj.pt
+      suitcase: ${..path_meshes_tform}/suitcase/${co3d_refs.suitcase}/tform_obj.pt
+      tv: ${..path_meshes_tform}/tv/${co3d_refs.tv}/tform_obj.pt
+
+
+train_datasets:
+  labeled:
+    sequences_count_max_per_category: ${train_sequences_count_max_per_category}
+    mesh_type: ${aligned_name}
+    tform_obj_type: ${aligned_name}
+    categories: ${categories}
+  unlabeled:
+    categories: ${categories}
+
+val_datasets:
+  main:
+    categories: ${categories}
+    subset_fraction: ${val_subset_fraction}
+  co3d_zsp:
+    categories: ${categories}
+    subset_fraction: ${val_subset_fraction}
+  pascal3d:
+    skip: False
+    subset_fraction: ${val_subset_fraction}
+    categories: ${categories}
+  objectnet3d:
+    skip: False
+    subset_fraction: ${val_subset_fraction}
+    categories: ${categories}
+
+test_datasets:
+  co3d:
+    subset_fraction: ${test_subset_fraction}
+    categories: ${categories}
+  co3d_zsp:
+    subset_fraction: ${test_subset_fraction}
+    categories: ${categories}
+  pascal3d:
+    subset_fraction: ${test_subset_fraction}
+    skip: False
+    categories: ${categories}
+  objectnet3d:
+    subset_fraction: ${test_subset_fraction}
+    skip: False
+    categories: ${categories}
+

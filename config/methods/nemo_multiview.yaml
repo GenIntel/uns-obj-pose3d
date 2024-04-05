@@ -1,0 +1,19 @@
+defaults:
+  - nemo
+
+class_name: NeMo_MultiView
+
+#checkpoint: ${platform.path_exps}/08-07_10-06-17_CO3D_NeMo_uniform_train_co3d_3s_slurm/nemo.ckpt
+#checkpoint: ${platform.path_exps}/08-07_14-10-07_CO3D_NeMo_train_co3d_3s_split_seq_separated_slurm/nemo.ckpt
+#checkpoint: ${platform.path_exps}/08-08_10-27-13_CO3D_NeMo_aug_color_dist_center_slurm/nemo.ckpt
+#checkpoint: ${platform.path_exps}/08-08_17-27-08_CO3D_NeMo_uniform_train_co3d_3s_slurm/nemo.ckpt
+checkpoint: ${platform.path_exps}/08-14_18-14-10_CO3D_NeMo_split_train_co3d_3s_val_seqs_separated_slurm/nemo.ckpt
+
+multiview:
+  type: single # single multiview multiview_mean_se3
+  batch_size: 4
+
+train:
+  val: True
+  epochs: 100
+

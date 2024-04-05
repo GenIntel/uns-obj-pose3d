@@ -1,0 +1,5 @@
+defaults:
+  - resnet50_frozen
+
+backbone:
+  freeze: False

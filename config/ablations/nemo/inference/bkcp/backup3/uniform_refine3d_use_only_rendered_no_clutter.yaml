@@ -1,0 +1,17 @@
+# @package _global_
+defaults:
+  - /ablations/nemo/inference/_default
+
+ablation_name_nemo_inference: 'uniform_refine3d_only_rendered_no_clutter'
+
+method:
+  nemo:
+    inference:
+      only_use_rendered_inliers: True
+      allow_clutter: False
+      sample:
+        method: uniform # epnp3d2d uniform
+        depth_from_box: False
+      refine:
+        enabled: True
+        dims_detached: [ 0, 1, 2 ] # 0-5, transl: 0, 1, 2, rot: 3, 4, 5

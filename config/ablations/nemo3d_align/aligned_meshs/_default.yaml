@@ -1,0 +1,6 @@
+# @package _global_
+
+ablation_name: ${ablation_name_nemo3d_align_aligned_meshs}
+
+aligned_name_suffix: ''
+# aligned_name: 50_to_1_${aligned_name_ref} # 'all_to_one_13_10_23' 'all_to_one_12_10_23'

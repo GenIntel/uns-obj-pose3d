@@ -1,0 +1,23 @@
+# @package _global_
+defaults:
+  - /ablations/tom/_default
+
+ablation_name_tom: 'dinov2_moving_avg'
+
+method:
+  nemo:
+    model:
+      head:
+        normalize: True
+#    inference:
+#      pre_rendered: False
+#    test:
+#      dataloader:
+#        batch_size: 2 # 4,
+    train:
+      T: 0.07
+      batch_accumulate_to_next_step: 10
+      dataloader:
+        batch_size: 12 # 12, artur: 24/32 wufei: 108
+      bank_feats_update: moving_average # loss_gradient, normalize_loss_gradient, moving_average, loss
+      alpha: 0.96

@@ -1,0 +1,32 @@
+defaults:
+  - nemo
+
+class_name: NeMo_Incremental
+
+#checkpoint: ${platform.path_exps}/08-07_14-10-07_CO3D_NeMo_train_co3d_3s_split_seq_separated_slurm/nemo.ckpt
+#checkpoint: ${platform.path_exps}/08-08_17-27-08_CO3D_NeMo_uniform_train_co3d_3s_slurm/nemo.ckpt
+
+train:
+  val: True
+  split: sequences_separated # 'random' 'sequences_separated' 'seqences_shared'
+  epochs_to_next_test: 4
+  epochs: 100
+  incremental:
+    enabled: True
+    sequences_labeled_count:
+    frames_count_max_per_sequence: 20
+    pseudo_labels_update:
+      use_ground_truth: False
+      epochs_to_next_update: 1
+      count_new_labels_proposed: 10
+      count_new_labels_selected_max: 3
+      multiview_count: 6
+      sim_threshold: 0.1 # 0.6
+
+  #sequences_tform4x4_labeled_count: 3 # how many sequences at start
+  #sequences_tform4x4_estimated_frames_count: 4
+  #sequences_tform4x4_est_sim_min: 0.6
+  #sequences_tform4x4_est_transl_consist_max: 1. # = 1m
+  #sequences_tform4x4_est_rot_consist_max: 0.5236 # pi / 6 = 30 degree
+  #sequences_new_proposals_count: 10
+

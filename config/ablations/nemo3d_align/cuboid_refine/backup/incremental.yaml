@@ -1,0 +1,49 @@
+# @package _global_
+defaults:
+  - override /methods@method.nemo: nemo_incremental
+
+ablation_name_nemo3d_align_cuboid_refine: incr
+ablation_name: ${ablation_name_nemo3d_align_cuboid_refine}
+
+method:
+  nemo:
+    num_noise: 5 # 5
+    test:
+      transform:
+        class_name: CenterZoom3D
+        W: 512
+        H: 512
+        scale:
+        scale_with_mask: 1.
+        center_rel_shift_xy:
+          - -0.
+          - -0.
+    inference:
+      use_mask_object: True
+      sample:
+        method: uniform # epnp3d2d uniform
+        epnp3d2d:
+          count_cams: 100
+          count_pts: 4
+      refine:
+        enabled: True
+        dims_detached: [0, 1, 2] # 0-5, transl: 0, 1, 2, rot: 3, 4, 5
+    train:
+      use_mask_object: True
+      val: True
+      split: sequences_separated # 'random' 'sequences_separated' 'seqences_shared'
+      epochs_to_next_test: 1
+      epochs: 10
+      incremental:
+        epoch_frames_count: 5000
+        decay_labeled: 0.7
+        enabled: True
+        sequences_labeled_count:
+        frames_count_max_per_sequence: # 20
+        pseudo_labels_update:
+          use_ground_truth: False
+          epochs_to_next_update: 1
+          count_new_labels_proposed: 50
+          count_new_labels_selected_max: 50
+          multiview_count: 4
+          sim_threshold: -1. # 0.1 # 0.6

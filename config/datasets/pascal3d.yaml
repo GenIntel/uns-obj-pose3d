@@ -1,0 +1,101 @@
+name: pascal3d
+class_name: Pascal3D
+
+modalities:
+    - 'rgb'
+    - 'rgb_mask'
+    - 'category'
+    - 'category_id'
+    - 'mask'
+    - 'kpts2d_annot'
+    - 'kpts2d_annot_vsbl'
+    - 'kpts3d'
+    - 'cam_intr4x4'
+    - 'cam_tform4x4_obj'
+    - 'size'
+    - 'bbox'
+    - 'depth'
+    # - 'mesh'
+
+url_pascal3d_raw: ftp://cs.stanford.edu/cs/cvgl/PASCAL3D+_release1.1.zip
+rpath_pascal3d_raw: PASCAL3D+_release1.1
+
+path_raw: ${platform.path_datasets_raw}/${.rpath_pascal3d_raw}
+path_preprocess: ${platform.path_datasets_preprocess}/PASCAL3D_Preprocess
+
+rpath_meshes: ${.rpath_pascal3d_raw}/CAD
+path_meshes: ${platform.path_datasets_raw}/${.rpath_meshes}
+
+path_cuboids: '${.path_preprocess}/mesh/cuboid250'
+fpaths_cuboids:
+    airplane: ${..path_cuboids}/aeroplane/mesh.ply
+    bicycle: ${..path_cuboids}/bicycle/mesh.ply
+    boat: ${..path_cuboids}/boat/mesh.ply
+    bottle: ${..path_cuboids}/bottle/mesh.ply
+    bus: ${..path_cuboids}/bus/mesh.ply
+    car: ${..path_cuboids}/car/mesh.ply
+    chair: ${..path_cuboids}/chair/mesh.ply
+    dining_table: ${..path_cuboids}/diningtable/mesh.ply
+    motorcycle: ${..path_cuboids}/motorbike/mesh.ply
+    couch: ${..path_cuboids}/sofa/mesh.ply
+    train: ${..path_cuboids}/train/mesh.ply
+    tv: ${..path_cuboids}/tvmonitor/mesh.ply
+
+setup:
+  enabled: False
+  override: False
+  remove_previous: False
+
+extract_meta:
+  enabled: False
+  override: False
+  remove_previous: False
+
+preprocess:
+  cuboid:
+    enabled: False
+    override: False
+    remove_previous: False
+  mask:
+    enabled: False
+    override: False
+    remove_previous: False
+  depth:
+    enabled: False
+    override: False
+    remove_previous: False
+
+image_sizes:
+    aeroplane: [512, 512]
+    bicycle: [512, 512]
+    boat: [512, 512]
+    bottle: [512, 512]
+    bus: [512, 512]
+    car: [512, 512]
+    chair: [512, 512]
+    diningtable: [512, 512]
+    motorbike: [512, 512]
+    sofa: [512, 512]
+    train: [512, 512]
+    tvmonitor: [512, 512]
+
+# skipped due to zero distance
+#   car:
+#       n03770679_15832
+#       n03770679_9715
+#       n04037443_21947
+#       n04037443_4668
+
+categories:
+#    - aeroplane
+#    - bicycle
+#    - boat
+#    - bottle
+#    - bus
+#     - car
+#    - chair
+#    - diningtable
+#    - motorbike
+#    - sofa
+#    - train
+#    - tvmonitor

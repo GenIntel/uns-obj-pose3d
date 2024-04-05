@@ -1,0 +1,9 @@
+# @package _global_
+
+val_datasets:
+  objectnet3d:
+    skip: False
+
+test_datasets:
+  objectnet3d:
+    skip: False

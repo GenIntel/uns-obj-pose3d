@@ -1,0 +1,9 @@
+# @package _global_
+
+val_datasets:
+  pascal3d:
+    skip: False
+
+test_datasets:
+  pascal3d:
+    skip: False

@@ -1,0 +1,18 @@
+# @package _global_
+
+ablation_name: ${ablation_name_tom}
+
+method:
+  nemo:
+    inference:
+      use_mask_object: False
+#    inference:
+#      pre_rendered: False
+#    test:
+#      dataloader:
+#        batch_size: 2 # 4,
+    train:
+      use_mask_object: False
+      batch_accumulate_to_next_step: 10
+      dataloader:
+        batch_size: 16 # 12, artur: 24/32 wufei: 108

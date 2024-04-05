@@ -1,0 +1,9 @@
+defaults:
+  - dinov2_frozen_base
+
+backbone:
+  hub_repo: 'facebookresearch/dino:main' # 'facebookresearch/dino:main', 'facebookresearch/dinov2'
+  hub_model: 'dino_vits8' # dino_vits8, dino_vitb8, dino_vits16, dino_vitb16, dinov2_vits14, dinov2_vitb14, dinov2_vitl14, dinov2_vitg14
+
+head:
+  normalize: True

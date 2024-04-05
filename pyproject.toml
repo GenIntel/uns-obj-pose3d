@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "OD3D"
+authors = [
+    {name = "Leonhard Sommer", email = "sommerl@cs.uni-freiburg.de"},
+]
+description = "Neural Mesh, Render and Compare"
+readme = "README.rst"
+requires-python = ">=3.7"
+keywords = ["3D", "detection", "object"]
+license = {text = "BSD-3-Clause"}
+dynamic = ["version"]
+
+dependencies = [
+    "wheel",
+    "pytest",
+    "wget",
+    "fvcore",
+    "iopath",
+    "tqdm",
+    "requests",
+    "h5py",
+    "wandb",
+    "cython",
+    "gdown",
+    "typer",
+    "hydra-core",
+    "pygit2",
+    "numba",
+    "pandas",
+    "seaborn",
+    "plotly",
+    "pycocotools",
+    "bboxtools",
+    "scipy",
+    "scikit-learn",
+    "scikit-image",
+    "seaborn",
+    "opencv-python",
+    "timm",
+    "torch",
+    "torchvision",
+    "torchaudio",
+    "visdom",
+    "open3d==0.17.0",
+    "tvb-gdist",
+    "pycuda",
+    "co3d@git+https://github.com/facebookresearch/co3d",
+    "segment-anything@git+https://github.com/facebookresearch/segment-anything.git",
+    "pytorch3d@git+https://github.com/facebookresearch/pytorch3d@stable",
+    "CGAL",
+]
+
+[project.optional-dependencies]
+od3d-gauss-splat = ["diff-gaussian-rasterization@git+https://github.com/limpbot/diff-gaussian-rasterization.git",]
+od3d-nvdiffrast = ["nvdiffrast@git+https://github.com/NVlabs/nvdiffrast",]
+
+
+[project.scripts]
+od3d = "od3d.cli._entry:main"

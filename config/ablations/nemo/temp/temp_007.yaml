@@ -1,0 +1,9 @@
+# @package _global_
+
+method:
+  nemo:
+    train:
+      T: 0.07
+    model:
+      head:
+        normalize: True

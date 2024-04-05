@@ -1,0 +1,33 @@
+# @package _global_
+ablation_name: aug_color
+
+method:
+    nemo:
+      #checkpoint: ${platform.path_exps}/07-25_13-49-03_CO3D_NeMo_aug_color_slurm/nemo.ckpt
+      train:
+        epoch: 5
+        transform:
+          random_color: True
+          random_center_zoom3d:
+            apply_txtr: False
+            W: 512
+            H: 512
+            dist_min: 15.
+            dist_max: 15.
+            center3d_min:
+                - -0.
+                - -0.
+                - -0.
+            center3d_max:
+                - +0.
+                - +0.
+                - +0.
+        test:
+            transform:
+                W: 512 # 800 512
+                H: 512 # 640 512
+                dist: 25. # 5. (scale_normalized_to_real) * 5. (default distance used)
+                center3d: [ 0., 0., 0. ] #  None
+
+train: True
+test: True

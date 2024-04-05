@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - /ablations/architecture/feats_dim/_default
+
+ablation_name_architecture_feats_dim: 'feat64'
+
+method:
+  nemo:
+    model:
+      head:
+        conv_blocks:
+          out_dims: [ 512, 512, 64 ]

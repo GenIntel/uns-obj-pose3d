@@ -1,0 +1,3 @@
+# @package _global_
+
+mesh_feats_dist_reduce_type: 'pca64_min_avg' #'avg' 'min' 'min_avg'

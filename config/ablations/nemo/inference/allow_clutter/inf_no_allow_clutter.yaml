@@ -1,0 +1,6 @@
+# @package _global_
+
+method:
+  nemo:
+    inference:
+      allow_clutter: False

@@ -1,0 +1,49 @@
+# @package _global_
+defaults:
+  - override /datasets@test_datasets.co3d: co3d_50s_test # co3d_50s_test # co3d_10s_test, co3d_test
+  - override /datasets@test_datasets.pascal3d: pascal3d_test
+  #- override /platform@platform_local: scratch # scratch, local_lmbraid19
+  #- override /platform: scratch # scratch, local_lmbraid19
+  - override /methods/model@method.nemo.model: dinov2_frozen #
+  #- override /methods/model@method.nemo.model: resnet50_unfrozen #
+
+ablation_name: debug
+
+test_datasets:
+    co3d:
+      skip: True
+      frames_count_max_per_sequence: 1 # 8
+    pascal3d:
+      skip: False
+      subset_fraction: 0.01
+
+
+method:
+  nemo:
+    #checkpoint: ${platform.path_exps}/08-08_17-27-08_CO3D_NeMo_uniform_train_co3d_3s_slurm/nemo.ckpt
+    checkpoint: ${platform.path_exps}/08-14_18-14-10_CO3D_NeMo_split_train_co3d_3s_val_seqs_separated_slurm/nemo.ckpt
+    #checkpoint: ${platform.path_exps}/08-14_15-48-54_CO3D_NeMo_resnet50_frozen_slurm/nemo.ckpt
+
+
+    inference:
+      visualize:
+        live: False
+        sim_feats_mesh_with_image: 'rendered' # 'rendered', 'verts2d'
+        pre_rendered: True
+
+    test:
+      dataloader:
+        num_workers: 0
+        batch_size: 4
+        pin_memory: True
+
+    train:
+      val: True
+      dataloader:
+        num_workers: 0
+        batch_size: 4
+        pin_memory: True
+
+
+train: True
+test: True

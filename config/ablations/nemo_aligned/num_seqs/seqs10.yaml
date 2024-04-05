@@ -1,0 +1,3 @@
+# @package _global_
+
+train_sequences_count_max_per_category: 10

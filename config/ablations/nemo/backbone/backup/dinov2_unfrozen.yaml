@@ -1,0 +1,10 @@
+# @package _global_
+defaults:
+  - /ablations/nemo_backbone@: _default
+  - override /methods/model@method.nemo.model: dinov2_unfrozen
+
+ablation_name: dinov2_unfrozen
+
+method:
+  nemo:
+    checkpoint: ${platform.path_exps}/09-01_09-54-51_Pascal3D_NeMo_dinov2_unfrozen_slurm/nemo.ckpt

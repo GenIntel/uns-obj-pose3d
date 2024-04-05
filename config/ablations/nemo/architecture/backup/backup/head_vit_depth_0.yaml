@@ -1,0 +1,18 @@
+# @package _global_
+defaults:
+  - /ablations/architecture/_default
+
+ablation_name_architecture: 'head_vit_depth_0'
+
+method:
+  nemo:
+    model:
+      head:
+        class_name: ViT
+        blocks:
+          dim: 128
+          depth: 0
+          num_heads: 4 # not dim must be devisiable by num_heads
+        fully_connected:
+          out_dim: # None means that there is no linear layer
+        normalize: True

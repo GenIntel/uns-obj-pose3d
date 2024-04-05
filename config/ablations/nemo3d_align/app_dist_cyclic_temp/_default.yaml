@@ -1,0 +1,6 @@
+# @package _global_
+
+ablation_name: ${ablation_name_nemo3d_align_app_dist_cyclic_temp}
+
+
+# temp: [1.0000e-02, 1.0000e-01, 1.0000e+00, 1.0000e+01, 1.0000e+02]

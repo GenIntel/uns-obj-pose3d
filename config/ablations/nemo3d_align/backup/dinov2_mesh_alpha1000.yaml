@@ -1,0 +1,12 @@
+# @package _global_
+
+ablation_name: dinov2_alpha1000
+
+mesh_name: 'alpha1000' # 'convex500', 'voxel500' 'poisson500', 'alpha500'
+
+train_datasets:
+  labeled:
+    mesh_name: ${mesh_name}
+test_datasets:
+  co3d:
+    mesh_name: ${mesh_name}

@@ -1,0 +1,10 @@
+defaults:
+  - pascal3d
+
+name: pascal3d_train
+
+dict_nested_frames:
+  train:
+
+subset_fraction: 1. # 0.05
+

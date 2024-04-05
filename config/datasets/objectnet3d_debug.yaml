@@ -1,0 +1,57 @@
+defaults:
+  - objectnet3d
+
+name: objectnet3d_debug
+class_name: ObjectNet3D
+
+##
+#modalities:
+#  - 'rgb'
+#  - 'category'
+#  - 'mask'
+#  - 'cam_intr4x4'
+#  - 'cam_tform4x4_obj'
+#  - 'categories'
+#  - 'size'
+#  - 'mesh'
+#  - 'bbox'
+#  - 'cam_tform4x4_objs'
+#  - 'bboxs'
+#  - 'meshs'
+#
+
+categories:
+  - bicycle
+#  #- truck
+#  #- train
+#  #- teddybear
+#  - car
+#  - bus
+#  - motorcycle
+#  - keyboard
+#  # - handbag
+#  - remote
+#  #- airplane
+#  - toilet
+#  - hairdryer
+#  - mouse
+#  - toaster
+#  #- hydrant
+#  - chair
+#  - laptop
+#  #- book
+#  - backpack
+#  - cellphone # from cellphone on, no zsp categories
+#  - microwave
+#  - bench
+#  #- bottle
+#  - couch
+#  - cup
+#  - suitcase
+#  - tv
+
+
+dict_nested_frames: # train test val
+    test:
+
+subset_fraction: 0.01 # 0.05 # 0.05

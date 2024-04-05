@@ -1,0 +1,4 @@
+# @package _global_
+
+defaults:
+  - override /datasets/co3d_refs@co3d_refs: r2

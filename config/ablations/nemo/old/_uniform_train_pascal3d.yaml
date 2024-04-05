@@ -1,0 +1,36 @@
+# @package _global_
+defaults:
+  - override /datasets@train_dataset: pascal3d_train #  co3d_50s_train # co3d_50s_train, co3d_train, pascal3d_train
+
+ablation_name: uniform_train_pascal3d
+
+method:
+    nemo:
+        train:
+            epochs: 40
+            transform:
+              random_center_zoom3d:
+                W: 512 # 800 512
+                H: 512 # 640 512
+                dist: 25. # 5. (scale_normalized_to_real) * 5. (default distance used)
+                center3d: [ 0., 0., 0. ] #  None
+                dist_min: 25.
+                dist_max: 25.
+                center3d_min:
+                  - -0.
+                  - -0.
+                  - -0.
+                center3d_max:
+                  - +0.
+                  - +0.
+                  - +0.
+
+        test:
+          transform:
+            W: 512 # 800 512
+            H: 512 # 640 512
+            dist: 25. # 5. (scale_normalized_to_real) * 5. (default distance used)
+            center3d: [ 0., 0., 0. ] #  None
+
+train: True
+test: True

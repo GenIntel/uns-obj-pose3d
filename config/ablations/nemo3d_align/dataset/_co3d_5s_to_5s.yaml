@@ -1,0 +1,37 @@
+# @package _global_
+defaults:
+  - override /datasets@train_datasets.src: co3d_no_zsp_5s_labeled_ref # co3d_no_zsp_5s_labeled_ref, co3dv1_zsp_10s, co3d_no_zsp_50s_unlabeled
+  - override /datasets@train_datasets.labeled: co3d_no_zsp_5s_labeled_ref # co3d_no_zsp_5s_labeled_ref, co3dv1_zsp_10s, co3d_no_zsp_50s_unlabeled
+  - override /datasets@test_datasets.co3d: co3d_no_zsp_5s_labeled_ref # co3d_no_zsp_5s_labeled_ref, co3dv1_zsp_10s, co3d_no_zsp_50s_unlabeled
+
+aligned_name:  # '${mesh_type}_dinov2s' # 'alpha500_dinov2s_test' # 'alphawrap500_dinov2b' 'latest_50s_to_5s_sota' # _sota_ref_86_64
+
+categories:
+  - bicycle
+  - truck
+  - train
+  - teddybear
+  - car
+  - bus
+  - motorcycle
+  - keyboard
+  - handbag
+  - remote
+  - airplane
+  - toilet
+  - hairdryer
+  - mouse
+  - toaster
+  - hydrant
+  - chair
+  - laptop
+  - book
+  - backpack
+  - cellphone # from cellphone on, no zsp categories
+  - microwave
+  - bench
+  - bottle
+  - couch
+  - cup
+  - suitcase
+  - tv

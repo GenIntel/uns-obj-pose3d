@@ -1,0 +1,16 @@
+class_name: SequentialTransform
+transforms:
+  - class_name: RandomCenterZoom3D
+    apply_txtr: False
+    config: ${texture_dataset}
+    W: 512
+    H: 512
+    scale_min: 0.5
+    scale_max: 2.0
+    center_rel_shift_xy_min:
+      - -0.
+      - -0.
+    center_rel_shift_xy_max:
+      - +0.
+      - +0.
+  - class_name: RGB_Random

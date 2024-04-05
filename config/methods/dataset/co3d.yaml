@@ -1,0 +1,15 @@
+
+train:
+    epochs: 5
+    dataloader:
+        num_workers: 4
+        batch_size: 12
+        pin_memory: True
+
+test:
+
+    dataloader:
+        num_workers: 4
+        batch_size: 4
+        pin_memory: True
+

@@ -1,0 +1,7 @@
+class_name: CenterZoom3D
+W: 448
+H: 448
+scale: 1.
+center_rel_shift_xy:
+  - -0.
+  - -0.

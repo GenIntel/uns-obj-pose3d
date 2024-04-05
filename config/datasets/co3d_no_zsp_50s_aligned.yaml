@@ -1,0 +1,8 @@
+defaults:
+  - co3d_no_zsp_50s_unlabeled
+
+name: co3d_no_zsp_50s_aligned
+
+sequences_require_gt_pose: True
+
+tform_obj_type: 'aligned_N_alpha500_dinov2b/r0' # 'label3d_cuboid' 'aligned_N_alpha500_dinov2b/r0'

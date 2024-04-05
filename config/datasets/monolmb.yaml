@@ -1,0 +1,62 @@
+name: monolmb
+class_name: MonoLMB
+
+modalities:
+    - 'size'
+    - 'category'
+    - 'category_id'
+    - 'cam_intr4x4'
+    - 'cam_tform4x4_obj'
+    - 'rays_center3d'
+    - 'mask'
+    - 'category'
+    - 'rgb'
+    - 'rgb_mask'
+    - 'mesh'
+    #- 'mask'
+    #- 'sequence_name'
+    #- 'sequence'
+    # - 'mesh'
+
+mesh_name: 'alpha500' # 'convex500', 'voxel500' 'poisson500', 'alpha500', 'cuboid1000'
+mesh_feats_type: 'M_dinov2_frozen_base_T_centerzoom512_R_acc' # 'R_acc' # 'R_avg', 'R_avg_norm'
+dist_verts_mesh_feats_reduce_type: 'min' # 'avg', 'min'
+
+frames_count_max_per_sequence:
+block_negative_depth: False
+
+path_raw: ${platform.path_datasets_raw}/MonoLMB
+path_preprocess: ${platform.path_datasets_preprocess}/MonoLMB_Preprocess
+
+setup:
+  enabled: False
+  override: False
+  remove_previous: False
+
+extract_meta:
+  enabled: False
+  override: False
+  remove_previous: False
+
+preprocess:
+  sfm:
+    enabled: True
+    override: False
+  mask:
+    enabled: True
+    override: False
+  pcl:
+    enabled: True
+    override: False
+  tform_obj:
+    enabled: True
+    override: False
+  mesh:
+    enabled: True
+    override: False
+  mesh_feats:
+    enabled: False
+    override: False
+  mesh_feats_dist:
+    enabled: False
+    override: False

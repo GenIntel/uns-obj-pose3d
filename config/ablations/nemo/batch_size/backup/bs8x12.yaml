@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - /ablations/score/batch_size/_default
+
+ablation_name_score_batch_size: 'bs8x12'
+
+method:
+  nemo:
+    train:
+      batch_accumulate_to_next_step: 8
+      dataloader:
+        batch_size: 12 # 12, artur: 24/32 wufei: 108

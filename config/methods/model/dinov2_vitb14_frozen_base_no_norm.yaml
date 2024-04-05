@@ -1,0 +1,5 @@
+defaults:
+  - dinov2_vitb14_frozen_base
+
+head:
+  normalize: False

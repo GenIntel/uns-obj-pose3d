@@ -1,0 +1,33 @@
+name: omniobject3d
+class_name: OmniObject3D
+
+modalities:
+  - 'rgb'
+  - 'category'
+  - 'size'
+  - 'mask'
+
+path_raw: ${platform.path_datasets_raw}/OmniObject3D
+path_preprocess: ${platform.path_datasets_preprocess}/OmniObject3D_Preprocess
+
+setup:
+  enabled: False
+  override: False
+  remove_previous: False
+
+extract_meta:
+  enabled: False
+  override: False
+  remove_previous: False
+
+
+credentials:
+  opendatalab: ${credentials.opendatalab}
+
+#dict_nested_frames:
+#    test:
+#        car:
+
+#categories:
+#    - 'car'
+

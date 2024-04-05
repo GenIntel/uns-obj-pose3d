@@ -1,0 +1,40 @@
+defaults:
+  - logger: wandb
+  - methods@method.nemo: nemo
+  - methods/dataset@method.nemo: co3d
+  - datasets@train_datasets.labeled: co3d_5s_train #  co3d_50s_train # co3d_50s_train, co3d_train, pascal3d_train
+  - datasets@val_datasets.main:
+  - datasets@val_datasets.pascal3d: pascal3d_val
+  - datasets@test_datasets.co3d: co3d_5s_test # co3d_10s_test, co3d_test
+  - datasets@test_datasets.pascal3d: pascal3d_test
+  - datasets@texture_dataset: dtd
+  - platform@platform_local: local
+  - platform: local
+  - datasets/categories@categories: car
+
+metrics:
+  - metricA
+  - metricB
+
+method:
+  nemo:
+    categories: ${categories}
+
+train_datasets:
+  labeled:
+    categories: ${categories}
+
+val_datasets:
+  main:
+    categories: ${categories}
+  pascal3d:
+    categories: ${categories}
+
+test_datasets:
+  co3d:
+    categories: ${categories}
+  pascal3d:
+    categories: ${categories}
+
+train: True
+test: True

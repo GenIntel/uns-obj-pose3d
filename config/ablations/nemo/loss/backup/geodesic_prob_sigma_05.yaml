@@ -1,0 +1,10 @@
+# @package _global_
+defaults:
+  - /ablations/score/loss/_default
+
+ablation_name_score_loss: 'geodesic_prob_sigma_05'
+
+method:
+  nemo:
+    train:
+      geodesic_prob_sigma: 0.5

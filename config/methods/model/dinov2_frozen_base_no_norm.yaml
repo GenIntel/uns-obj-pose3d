@@ -1,0 +1,5 @@
+defaults:
+  - dinov2_frozen_base
+
+head:
+  normalize: False

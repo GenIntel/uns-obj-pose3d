@@ -1,0 +1,4 @@
+class_name: torch.optim.Adam
+kwargs:
+  lr: 1e-4 # 0.0001
+  weight_decay: 0.0001

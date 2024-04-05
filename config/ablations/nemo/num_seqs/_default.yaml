@@ -1,0 +1,18 @@
+# @package _global_
+
+ablation_name: ${ablation_name_nemo_num_seqs}
+
+#method:
+#  nemo:
+#    train:
+#      T: 0.07
+#    model:
+#      head:
+#        class_name: ViT
+#        blocks:
+#          dim: 128
+#          depth: 1
+#          num_heads: 4 # not dim must be devisiable by num_heads
+#        fully_connected:
+#          out_dim: # None means that there is no linear layer
+#        #normalize: False

@@ -1,0 +1,37 @@
+# @package _global_
+#defaults:
+#  - override /datasets@test_datasets.pascal3d: pascal3d_train
+
+#train_datasets:
+#  labeled:
+#    path_cuboids: '${.path_preprocess}/mesh/cuboid1000' # 250 500 1000
+
+
+#test_datasets:
+#  pascal3d:
+#    dict_nested_frames:
+#      train:
+#        aeroplane:
+#          - n04012084_4106
+#    subset_fraction: 1.
+
+#method:
+#    nemo:
+#      checkpoint: ${platform.path_exps}/03-15_11-52-37_Pascal3D_NeMo_slurm/nemo.ckpt
+#      # 03-15_11-52-37_Pascal3D_NeMo_slurm : cuboid1000
+# 03-15_14-48-48_Pascal3D_NeMo_cuboid1000_uniform_refine3d_mesh_slurm
+#      # 03-14_14-02-46_Pascal3D_NeMo_uniform_refine3d_mesh_slurm: cuboid250
+##      # 12-08_10-37-47_Pascal3D_NeMo_epochs50_slurm
+##      # 12-08_10-38-10_Pascal3D_NeMo_epochs100_slurm
+##      # 12-08_10-37-58_Pascal3D_NeMo_epochs150_slurm
+#
+#      inference:
+#        live: True
+# train: False
+
+#test:
+#  dataloader:
+#    batch_size: 2
+
+
+

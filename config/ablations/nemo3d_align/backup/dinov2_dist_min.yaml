@@ -1,0 +1,12 @@
+# @package _global_
+
+ablation_name: dinov2_dist_min
+
+dist_verts_mesh_feats_reduce_type: 'min' # 'min', 'avg', 'cyclic'
+
+train_datasets:
+  labeled:
+    dist_verts_mesh_feats_reduce_type: ${dist_verts_mesh_feats_reduce_type}
+test_datasets:
+  co3d:
+    dist_verts_mesh_feats_reduce_type: ${dist_verts_mesh_feats_reduce_type}

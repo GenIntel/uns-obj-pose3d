@@ -1,0 +1,8 @@
+# @package _global_
+
+ablation_name: ${ablation_name_nemo_loss}
+
+method:
+  nemo:
+    train:
+      loss: cross_entropy_smooth_geo

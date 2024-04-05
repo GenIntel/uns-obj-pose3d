@@ -1,0 +1,10 @@
+# @package _global_
+
+method:
+  nemo:
+    refine_optimization_steps: 20 # 20
+    refine_lr: 2e-2 # 2e-2
+    refine_pts_weight: 0. # 0.5 # 0.1 too small, 1 too large
+    refine_arap_weight: 1. # 1.
+    refine_reg_weight: 0. # 0.1
+    refine_arap_geo_std: 0.05 # 0.05 - 0.1

@@ -1,0 +1,8 @@
+# @package _global_
+defaults:
+  - /ablations/nemo3d_align/dist_cyclic_temp/_default
+
+method:
+  nemo:
+    geo_cyclic_weight_temp: 0.7
+    app_cyclic_weight_temp: 0.7

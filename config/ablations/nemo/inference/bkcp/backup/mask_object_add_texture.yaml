@@ -1,0 +1,27 @@
+# @package _global_
+defaults:
+    - override /datasets@test_datasets.co3d: co3d_50s_test # co3d_10s_test, co3d_test
+
+ablation_name: inference_mask_object_add_texture
+
+test_datasets:
+    co3d:
+        frames_count_max_per_sequence: 8
+
+method:
+    nemo:
+        checkpoint: ${platform.path_exps}/08-08_17-27-08_CO3D_NeMo_uniform_train_co3d_3s_slurm/nemo.ckpt
+
+        inference:
+          use_mask_object: True
+        test:
+          transform:
+            W: 512
+            H: 512
+            dist: # 14.
+            center3d: [ 0., 0., 0. ] #
+            apply_txtr: True
+            config: ${texture_dataset}
+
+train: False
+test: True

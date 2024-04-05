@@ -1,0 +1,7 @@
+# @package _global_
+defaults:
+  - /ablations/nemo/num_seqs/_default
+
+ablation_name_nemo_num_seqs: 'seqs10'
+
+train_sequences_count_max_per_category: 10

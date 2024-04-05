@@ -1,0 +1,10 @@
+# @package _global_
+defaults:
+  - /ablations/epochs/_default
+
+ablation_name_epochs: 'epochs10'
+
+method:
+  nemo:
+    train:
+      epochs: 10

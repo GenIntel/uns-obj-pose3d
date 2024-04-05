@@ -1,0 +1,43 @@
+defaults:
+  - logger: wandb
+  - methods@method.nemo: nemo_incremental
+  - methods/dataset@method.nemo: co3d
+  - datasets@train_datasets.labeled: co3d # this is the default train dataset
+  - datasets@train_datasets.unlabeled: co3d #
+  - datasets@val_datasets.main: co3d # this is used for model selection, if no main is specified, a split on the train dataset is given
+  - datasets@val_datasets.pascal3d: pascal3d_val
+  - datasets@test_datasets.co3d: co3d_5s
+  - datasets@test_datasets.pascal3d: pascal3d_test
+  - datasets@texture_dataset: dtd
+  - platform@platform_local: local
+  - platform: local
+  - datasets/categories@categories: car
+
+metrics:
+  - metricA
+  - metricB
+
+method:
+  nemo:
+    categories: ${categories}
+
+train_datasets:
+  labeled:
+    categories: ${categories}
+  unlabeled:
+    categories: ${categories}
+
+val_datasets:
+  main:
+    categories: ${categories}
+  pascal3d:
+    categories: ${categories}
+
+test_datasets:
+  co3d:
+    categories: ${categories}
+  pascal3d:
+    categories: ${categories}
+
+train: True
+test: True

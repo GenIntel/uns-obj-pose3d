@@ -1,0 +1,34 @@
+name: imagenet
+class_name: ImageNet
+
+modalities:
+  - 'rgb'
+  #- 'category'
+  - 'size'
+  - 'bbox'
+
+path_raw: ${platform.path_datasets_raw}/ImageNet
+path_preprocess: ${platform.path_datasets_preprocess}/ImageNet_Preprocess
+
+
+setup:
+  enabled: False
+  override: False
+  remove_previous: False
+
+extract_meta:
+  enabled: False
+  override: False
+  remove_previous: False
+
+
+credentials:
+  kaggle: ${credentials.kaggle}
+
+#dict_nested_frames: # 'train_cls', 'train_loc', 'val', 'test']
+#    test:
+#        car:
+
+#categories:
+#    - 'car'
+

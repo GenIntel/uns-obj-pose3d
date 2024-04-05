@@ -1,0 +1,7 @@
+# @package _global_
+defaults:
+  - /ablations/nemo3d_align/mesh@: _default
+
+ablation_name: dinov2_convex1000
+
+mesh_name: 'convex1000' # 'convex500', 'voxel500' 'poisson500', 'alpha500'

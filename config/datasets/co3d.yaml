@@ -1,0 +1,275 @@
+defaults:
+  - keypoints@keypoints
+
+name: co3d
+class_name: CO3D
+
+modalities:
+    - 'size'
+    - 'category'
+    - 'category_id'
+    - 'cam_intr4x4'
+    - 'cam_tform4x4_obj'
+    - 'rays_center3d'
+    - 'category'
+    - 'rgb'
+    - 'rgb_mask'
+    - 'mask'
+    - 'sequence_name_unique'
+    - 'sequence'
+    # - 'mesh'
+
+mesh_type: 'alpha500' # 'cuboid500' 'convex500', 'voxel500' 'poisson500', 'alpha500', 'cuboid1000'
+
+mesh_feats_type: 'M_dinov2_vitb14_frozen_base_no_norm_T_centerzoom512_R_acc' # dinov2_vitb14_frozen_base_no_norm M_dinov2_frozen_base_T_centerzoom512_R_acc, M_nemo_old_T_centerzoom512_R_acc 'R_acc' # 'R_avg', 'R_avg_norm'
+
+mesh_feats_dist_reduce_type: 'min_avg' # 'avg', 'min', 'min_avg'
+
+# tform_obj_type: 'label3d_cuboid' # 'label3d_cuboid' 'aligned_N_alpha500_dinov2b/r0'
+
+frames_count_max_per_sequence:
+sequences_count_max_per_category:
+block_negative_depth: False
+
+path_raw: ${platform.path_datasets_raw}/CO3D
+path_preprocess: ${platform.path_datasets_raw}/CO3D_Preprocess
+
+setup:
+  enabled: False
+  override: False
+  remove_previous: False
+
+extract_meta:
+  enabled: False
+  override: False
+  remove_previous: False
+
+preprocess:
+  sfm:
+    enabled: False
+    override: False
+  mask:
+    enabled: False
+    override: False
+  pcl:
+    enabled: False
+    override: False
+  tform_obj:
+    enabled: False
+    override: False
+  mesh:
+    enabled: False
+    override: False
+  mesh_feats:
+    enabled: False
+    override: False
+  mesh_feats_dist:
+    enabled: False
+    override: False
+
+#sequences_require_good_cam_movement: False
+#sequences_require_pcl: True # False
+#sequences_sort_pcl_score: False # False
+#sequences_count_max_per_category: None # None
+
+dict_nested_frames_ban:
+  car:
+    '206_21796_45540': # toy car
+    '429_60346_116890': # problem: 1: cam inside mesh, 2: too close
+    '194_20894_41084': # problem: mask front vehicle zero (behind vehicle non zero)
+    '194_20898_41093': # problem: mask front vehicle zero (behind vehicle non zero)
+    '216_22827_48422': # problem: bad relative pose estimation
+    '216_22841_48461': # problem: bad relative pose estimation
+    '351_37072_67647': # problem: toy car
+    '216_22833_48435': # problem: bad relative pose estimation
+    '340_35306_64677': # problem: bad relative pose estimation (plus change of sequence?)
+
+    '206_21799_45886':  # problem: bad relative pose estimation
+#    '429_60401_117239': # problem: closeup
+#    '194_20899_41094':  # relabel?
+#    '216_22795_47233':  # relabel?
+#    '425_59326_114632':
+#    '194_20897_41083':
+#    '216_22800_47486':
+#    '216_22801_47487':
+#    '216_22831_48446':
+#    '216_22796_47484':
+#    '216_22803_47496':
+#    '216_22797_47235':
+    '106_12674_24709': # broken colmap
+  bicycle:
+    '377_43836_87236': # two bicycles with inverse directions
+
+#dict_nested_frames:
+#  car:
+#    '185_19982_37678':
+#    '206_21799_45886':
+#    '194_20939_43630':
+#    '194_20900_41097':
+#    '116_13655_29006':
+#    '206_21810_45890':
+#    '106_12650_23736':
+#    '206_21805_45881':
+#    '216_22836_48452':
+#    '216_22808_47498':
+#  toyplane:
+#    '398_50528_99129':
+#    '341_35560_65483':
+#    '255_27516_55384':
+#    '422_58698_113949':
+#    '255_27511_55370':
+#    '372_40893_81107':
+#    '375_42711_85720':
+#    '375_42646_85487':
+#    '111_13148_23780':
+#    '426_59638_115345':
+#  bicycle:
+#    '397_49943_98337':
+#    '404_53464_104258':
+#    '392_47830_94973':
+#    '426_59751_116222':
+#    '392_47564_94578':
+#    '410_55803_108469':
+#    '393_48296_95654':
+#    '404_53745_104804':
+#    '392_47555_94569':
+#    '396_49677_97864':
+#    '387_46776_93106':
+#  motorcycle:
+#    '415_57065_109871':
+#    '425_59369_114937':
+#    '425_59359_115027':
+#    '427_59906_115672':
+#    '411_56044_108398':
+#    '349_36520_66801':
+#    '421_58558_113203':
+#    '411_56037_108372':
+#    '408_55512_106884':
+#    '365_39208_76369':
+  #car:
+  #toyplane:
+  #bicycle:
+  #motorcycle:
+
+# ban bicycle: 377_43836_87236
+#  wineglass:
+#  car:
+
+#    '185_19982_37678':
+#    '206_21799_45886':
+#    '194_20939_43630':
+#    '194_20900_41097':
+#    '206_21810_45890':
+#    '106_12650_23736':
+#    '206_21805_45881':
+#    '216_22836_48452':
+#    '216_22808_47498':
+#    '216_22790_47232':
+#    '194_20898_41093':
+#    '216_22795_47233':
+#    '425_59326_114632':
+#    '194_20899_41094':
+#    '216_22801_47487':
+#    '216_22831_48446':
+#    '216_22796_47484':
+#    '417_57855_111864':
+#    '194_20894_41084':
+#    '185_19999_39425':
+#    '216_22811_47499':
+#    '351_37059_67904':
+#    '216_22830_48436':
+#    '216_22802_47489':
+#    '421_58370_112528':
+#    '216_22837_48454':
+#    '250_26778_55253':
+#    '216_22838_48455':
+#    '421_58408_112554':
+#    '206_21824_46375':
+#    '427_59912_115725':
+#    '216_22789_47234':
+#    '415_57125_110159':
+#    '415_57091_109957':
+#    '429_60407_117266':
+#    '194_20901_41098':
+#    '244_25995_52229':
+#    '244_25999_52630':
+#    '433_61554_120364':
+#    '623_102793_204924':
+#    '623_102776_204875':
+#    '590_88856_176024':
+#    '500_71857_140399':
+#    '194_20880_39999':
+#    '481_68768_134166':
+#    '431_60855_118203':
+#    '425_59318_114490':
+#    '421_58388_112532':
+#    '464_65811_129850':
+#    '336_34837_63695':
+#    '106_12662_23043':
+#    '336_34860_64267':
+#    '185_19981_37675':
+#    '421_58409_112555':
+#    '605_94650_188718':
+#    '491_70273_136795':
+#    '617_99941_198857':
+#    '519_74492_144714':
+#    '590_88878_176205':
+#    '590_88877_176199':
+
+path_cuboids: ${.path_preprocess}/cuboids/avg/co3d_50s_train # ${.name}
+fpaths_cuboids:
+    car: ${..path_cuboids}/car.ply # car/106_12650_23736.ply /cuboid_max_1000.ply
+
+categories:
+#  - car
+#  - apple
+#  - backpack
+#  - ball
+#  - banana
+#  - baseballbat
+#  - baseballglove
+#  - bench
+#  - bicycle
+#  - book
+#  - bottle
+#  - bowl
+#  - broccoli
+#  - cake
+#  - car
+#  - carrot
+#  - cellphone
+#  - chair
+#  - couch
+#  - cup
+#  - donut
+#  - frisbee
+#  - hairdryer
+#  - handbag
+#  - hotdog
+#  - hydrant
+#  - keyboard
+#  - kite
+#  - laptop
+#  - microwave
+#  - motorcycle
+#  - mouse
+#  - orange
+#  - parkingmeter
+#  - pizza
+#  - plant
+#  - remote
+#  - sandwich
+#  - skateboard
+#  - stopsign
+#  - suitcase
+#  - teddybear
+#  - toaster
+#  - toilet
+#  - toybus
+#  - toyplane
+#  - toytrain
+#  - toytruck
+#  - tv
+#  - umbrella
+#  - vase
+#  - wineglass

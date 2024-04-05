@@ -1,0 +1,12 @@
+# @package _global_
+
+ablation_name: dinov2_avg
+
+mesh_feats_type: 'M_dinov2_frozen_base_T_centerzoom512_R_avg' # 'R_acc' # 'R_avg', 'R_avg_norm'
+
+train_datasets:
+  labeled:
+    mesh_feats_type: ${mesh_feats_type}
+test_datasets:
+  co3d:
+    mesh_feats_type: ${mesh_feats_type}

@@ -1,0 +1,66 @@
+defaults:
+  - logger: wandb
+  - methods@method.nemo: nemo
+  - methods/dataset@method.nemo: pascal3d
+  - datasets@train_datasets.labeled: pascal3d_train #  co3d_50s_train # co3d_50s_train, co3d_train, pascal3d_train
+  - datasets@val_datasets.main: pascal3d_val
+  - datasets@test_datasets.pascal3d: pascal3d_test
+  - datasets@texture_dataset: dtd
+  - platform@platform_local: local
+  - platform: local
+  - datasets/categories@categories: pascal3d
+
+metrics:
+  - metricA
+  - metricB
+
+
+train: True
+test: True
+
+train_datasets:
+  labeled:
+    # path_cuboids: '${.path_preprocess}/mesh/cuboid1000' # 250 500 1000
+    #subset_fraction: 0.1
+    categories: ${categories}
+
+val_datasets:
+  main:
+    #subset_fraction: 0.001
+    categories: ${categories}
+
+test_datasets:
+  pascal3d:
+    subset_fraction: 1.
+    categories: ${categories}
+    #dict_nested_frames:
+    #   val:
+    #      bus:
+    #        - "n04146614_2398"
+
+method:
+  nemo:
+#    inference:
+#      pre_rendered: False
+#      sample:
+#        method: epnp3d2d # epnp3d2d uniform
+#        depth_from_box: False
+#      refine:
+#        enabled: True
+#        dims_detached: [ ] # 0-5, transl: 0, 1, 2, rot: 3, 4, 5
+#
+#    checkpoint: ${platform.path_exps}/01-25_23-03-28_Pascal3D_NeMo_von_mises_fisher_normalize_verts_slurm/nemo.ckpt
+    # checkpoint: ${platform.path_exps}/12-08_10-37-47_Pascal3D_NeMo_epochs50_slurm/nemo.ckpt
+    # checkpoint: ${platform.path_exps}/11-20_19-29-23_Pascal3D_NeMo_local/nemo.ckpt # 08-28_09-14-15_Pascal3D_NeMo_slurm, 08-25_17-08-51_Pascal3D_NeMo_slurm
+    train:
+      val: True
+      epochs: 50 # artur: 200  wufei: 800
+#      dataloader:
+#        num_workers: 4
+#        batch_size: 12 # artur: 24/32 wufei: 108
+#        pin_memory: True
+#    test:
+#      dataloader:
+#        num_workers: 4
+#        batch_size: 4
+#        pin_memory: True

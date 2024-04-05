@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - /ablations/nemo_inference@: default
+
+ablation_name: inference_apply_txtr
+
+method:
+    nemo:
+      test:
+        transform:
+          apply_txtr: True
+          config: ${texture_dataset}

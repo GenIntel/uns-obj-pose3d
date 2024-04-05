@@ -1,0 +1,5 @@
+# @package _global_
+
+ablation_name: $ablation_name_nemo3d_align_dist_weight
+
+# alpha: [0. 0.0100, 0.0316, 0.1000, 0.3162, 1.0000]

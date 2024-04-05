@@ -1,0 +1,5 @@
+# @package _global_
+
+mesh_feats_dist_reduce_type: 'min' #'avg' 'min' 'min_avg'
+
+aligned_name: #  '${mesh_type}_dinov2s_ref' # 'alpha500_dinov2s_test' # 'alphawrap500_dinov2b' 'latest_50s_to_5s_sota' # _sota_ref_86_64

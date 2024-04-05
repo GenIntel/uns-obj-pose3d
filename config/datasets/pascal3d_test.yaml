@@ -1,0 +1,23 @@
+defaults:
+  - pascal3d
+
+name: pascal3d_test
+
+dict_nested_frames:
+  val:
+
+subset_fraction: 1. #0.05
+
+#categories:
+#  #- airplane
+#  - bicycle
+#  #- boat
+#  #- bottle
+#  - bus
+#  - car
+#  - chair
+#  #- dining_table
+#  - motorcycle
+#  - couch
+#  #- train
+#  - tv

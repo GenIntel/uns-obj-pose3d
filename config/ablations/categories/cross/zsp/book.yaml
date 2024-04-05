@@ -1,0 +1,37 @@
+# @package _global_
+defaults:
+  - /ablations/categories/cross/_default
+  #- /ablations/categories/cross/_add_pascal3d
+  #- /ablations/categories/cross/_add_objectnet3d
+  - /ablations/categories/cross/_add_co3dv1_10s_zsp_labeled
+
+ablation_name_categories: cat1_book
+
+categories:
+#  - bicycle
+#  - truck
+#  - train
+#  - teddybear
+#  - car
+#  - bus
+#  - motorcycle
+#  - keyboard
+#  - handbag
+#  - remote
+#  - airplane
+#  - toilet
+#  - hairdryer
+#  - mouse
+#  - toaster
+#  - hydrant
+#  - chair
+#  - laptop
+  - book
+#  - backpack
+#  - cellphone # from cellphone on, no zsp categories
+#  - bench
+#  - bottle
+#  - couch
+#  - cup
+#  - suitcase
+#  - tv

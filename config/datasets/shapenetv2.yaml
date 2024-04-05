@@ -1,0 +1,23 @@
+
+
+name: shapenetv2
+class_name: ShapeNet
+
+path_raw: ${platform.path_datasets_raw}/ShapeNetCore.v2
+path_preprocess: ${platform.path_datasets_preprocess}/ShapeNetCore.v2
+
+setup:
+  enabled: False
+  override: False
+  remove_previous: False
+
+extract_meta:
+  enabled: False
+  override: False
+  remove_previous: False
+
+# preprocess:
+
+modalities:
+    - 'rgb'
+

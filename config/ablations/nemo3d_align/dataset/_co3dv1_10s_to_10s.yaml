@@ -1,0 +1,35 @@
+# @package _global_
+defaults:
+  - override /datasets@train_datasets.src: co3dv1_zsp_10s # co3d_no_zsp_5s_labeled_ref, co3dv1_zsp_10s, co3d_no_zsp_50s_unlabeled
+  - override /datasets@train_datasets.labeled: co3dv1_zsp_10s # co3d_no_zsp_5s_labeled_ref, co3dv1_zsp_10s, co3d_no_zsp_50s_unlabeled
+  - override /datasets@test_datasets.co3d: co3dv1_zsp_10s # co3d_no_zsp_5s_labeled_ref, co3dv1_zsp_10s, co3d_no_zsp_50s_unlabeled
+
+categories:
+  - bicycle
+  - truck
+  - train
+  - teddybear
+  - car
+  - bus
+  - motorcycle
+  - keyboard
+  - handbag
+  - remote
+  - airplane
+  - toilet
+  - hairdryer
+  - mouse
+  - toaster
+  - hydrant
+  - chair
+  - laptop
+  - book
+  - backpack
+#  - cellphone # from cellphone on, no zsp categories
+#  - microwave
+#  - bench
+#  - bottle
+#  - couch
+#  - cup
+#  - suitcase
+#  - tv

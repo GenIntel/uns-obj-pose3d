@@ -1,0 +1,9 @@
+# @package _global_
+defaults:
+  - /ablations/nemo3d_align/app_dist_cyclic_temp/_default
+
+ablation_name_nemo3d_align_app_dist_cyclic_temp: app_cyclic_temp_09
+
+method:
+  nemo:
+    app_cyclic_weight_temp: 0.9

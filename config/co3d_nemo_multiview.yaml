@@ -1,0 +1,36 @@
+defaults:
+  - logger: wandb
+  - methods@method.nemo: nemo_multiview
+  - methods/dataset@method.nemo: co3d
+  - datasets@train_datasets.labeled: co3d_5s_train #  co3d_50s_train # co3d_50s_train, co3d_train, pascal3d_train
+  - datasets@val_datasets.main:
+  - datasets@test_datasets.co3d: co3d_5s_test # co3d_10s_test, co3d_test
+  - platform@platform_local: local
+  - datasets@texture_dataset: dtd
+  - platform: local
+  - datasets/categories@categories: car
+
+metrics:
+  - metricA
+  - metricB
+
+method:
+  nemo:
+    categories: ${categories}
+
+train_datasets:
+  labeled:
+    categories: ${categories}
+
+val_datasets:
+  main:
+    categories: ${categories}
+
+test_datasets:
+  co3d:
+    categories: ${categories}
+
+
+
+train: False
+test: True

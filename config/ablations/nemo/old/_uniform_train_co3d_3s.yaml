@@ -1,0 +1,14 @@
+# @package _global_
+defaults:
+  - override /datasets@train_dataset: co3d_3s_train #  co3d_55s_train, pascal3d_train
+
+ablation_name: uniform_train_co3d_3s
+
+method:
+    nemo:
+        checkpoint: ${platform.path_exps}/08-08_17-27-08_CO3D_NeMo_uniform_train_co3d_3s_slurm/nemo.ckpt
+
+        train:
+            epochs: 20
+train: False
+test: True

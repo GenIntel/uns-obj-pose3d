@@ -1,0 +1,5 @@
+class_name: torch.optim.SGD
+kwargs:
+  lr: 0.5
+  momentum: 0.9
+  weight_decay: 2e-05

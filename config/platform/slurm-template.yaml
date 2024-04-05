@@ -1,0 +1,26 @@
+link: slurm
+shared_home_with_local: False
+ws_name: od3d # /work/dlclarge1/sommerl-od3d
+pull_od3d: True
+pull_od3d_submodules: True
+install_od3d: True
+path_od3d: /work/dlclarge1/sommerl-od3d/od3d
+path_datasets_raw: /work/dlclarge1/sommerl-od3d/datasets
+path_datasets_preprocess: /work/dlclarge1/sommerl-od3d/datasets #for student: create your own directory in dlclarge
+path_exps: /work/dlclarge1/sommerl-od3d/exps
+path_cuda: /work/dlclarge1/sommerl-od3d/cudas/cuda-11.7 # should be cuda-11.7
+path_home: /ihome/sommerl
+url_od3d: git@github.com:Generative-Vision-Robust-Learning/od3d.git
+partition: lmb_gpu-rtx2080 # lmb_gpu-teslaP100 lmb_gpu-1080ti, lmb_gpu-rtx2080, testdlc_gpu-rtx2080, alldlc_gpu-rtx3080, alldlc_gpu-rtx2080, lmbdlc_gpu-rtx2080
+# 1. lmb_gpu-rtx2080 : usually empty, but only 3 slots ?
+# 2. lmbdlc_gpu-rtx2080 :
+# 3. alldlc_gpu-rtx3080 : usually empty, but fewer gb?
+# 4. alldlc_gpu-rtx2080
+
+# lmb_gpu-teslaP100 : error: No Kernel Image is available
+# lmbdlc_gpu-rtx2080: problem: long waiting queue
+username: sommerl
+gpu_count: 1
+cpu_count: 8
+ram: "40gb"
+walltime: "24:00:00"

@@ -1,0 +1,9 @@
+defaults:
+  - pascal3d
+
+name: pascal3d_debug
+
+dict_nested_frames:
+  val:
+
+subset_fraction: 0.01 #0.05

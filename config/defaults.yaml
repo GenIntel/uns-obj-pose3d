@@ -1,0 +1,16 @@
+defaults:
+    - logger: wandb
+    - credentials: default
+    - platform: local
+    - platform@platform_local: local
+
+use_wandb: true
+wandb_project_name: NeMo
+
+seed_number: 0
+training:
+    scale_iterations_per_epoch: 1.0
+
+inference:
+    visualize_num_samples: 0
+

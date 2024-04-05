@@ -1,0 +1,12 @@
+# @package _global_
+
+method:
+  nemo:
+    #checkpoint: ${platform.path_exps}/01-25_23-03-39_Pascal3D_NeMo_von_mises_fisher_normalize_slurm/nemo.ckpt
+    bank_feats_normalize: True
+    bank_feats_distribution: 'von-mises-fisher' # 'von-mises-fisher', 'gaussian'
+    train:
+      T: 0.07
+    model:
+      head:
+        normalize: True

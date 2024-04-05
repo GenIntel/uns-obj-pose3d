@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - /ablations/nemo_inference@: default
+
+ablation_name: inference_refine_transl
+
+method:
+    nemo:
+      inference:
+        refine:
+          enabled: True
+          dims_detached: [] # 0-5, transl: 0, 1, 2, rot: 3, 4, 5

@@ -1,0 +1,10 @@
+# @package _global_
+defaults:
+  - /ablations/nemo3d_align/ransac/_default
+
+ablation_name_nemo3d_align_ransac: ransac_samples500
+
+method:
+  nemo:
+    ransac:
+      samples: 500

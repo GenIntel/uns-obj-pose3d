@@ -1,0 +1,18 @@
+# @package _global_
+defaults:
+  - /ablations/nemo/inference/_default
+
+ablation_name_nemo_inference: 'epnp_refine6d_epochs60'
+
+method:
+  nemo:
+    inference:
+      pre_rendered: False
+      sample:
+        method: epnp3d2d # epnp3d2d uniform
+        depth_from_box: False
+      refine:
+        enabled: True
+        dims_detached: [ ] # 0-5, transl: 0, 1, 2, rot: 3, 4, 5
+      optimizer:
+        epochs: 60 # 30

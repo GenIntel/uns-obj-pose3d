@@ -1,0 +1,17 @@
+# @package _global_
+defaults:
+  - /ablations/nemo/inference/_default
+
+ablation_name_nemo_inference: 'epnp_refine6d_usemask'
+
+method:
+  nemo:
+    inference:
+      use_mask_object: True
+      pre_rendered: False
+      sample:
+        method: epnp3d2d # epnp3d2d uniform
+        depth_from_box: False
+      refine:
+        enabled: True
+        dims_detached: [ ] # 0-5, transl: 0, 1, 2, rot: 3, 4, 5

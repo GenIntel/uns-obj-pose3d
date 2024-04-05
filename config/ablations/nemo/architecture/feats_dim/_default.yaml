@@ -1,0 +1,4 @@
+# @package _global_
+
+ablation_name: ${ablation_name_architecture_feats_dim}
+

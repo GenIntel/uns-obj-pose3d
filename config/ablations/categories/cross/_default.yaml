@@ -1,0 +1,19 @@
+# @package _global_
+
+ablation_name: ${ablation_name_categories}
+
+val_datasets:
+  pascal3d:
+    skip: True
+  objectnet3d:
+    skip: True
+  co3d_zsp:
+    skip: True
+
+test_datasets:
+  pascal3d:
+    skip: True
+  objectnet3d:
+    skip: True
+  co3d_zsp:
+    skip: True

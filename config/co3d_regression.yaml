@@ -1,0 +1,31 @@
+defaults:
+  - logger: wandb
+  - methods@method.regression: regression
+  - datasets@train_datasets.labeled: co3d_50s_train #  co3d_50s_train # co3d_50s_train, co3d_train, pascal3d_train
+  - datasets@val_datasets.main: co3d_5s_val
+  - datasets@val_datasets.pascal3d: pascal3d_val
+  - datasets@test_datasets.co3d: co3d_5s_test # co3d_10s_test, co3d_test
+  - datasets@test_datasets.pascal3d: pascal3d_test
+  - platform@platform_local: local
+  - datasets@texture_dataset: dtd
+  - platform: local
+  - datasets/categories@categories: car
+
+metrics:
+  - metricA
+  - metricB
+
+train: True
+test: True
+
+val_datasets:
+  main:
+    categories: ${categories}
+  pascal3d:
+    categories: ${categories}
+
+test_datasets:
+  co3d:
+    categories: ${categories}
+  pascal3d:
+    categories: ${categories}

@@ -1,0 +1,9 @@
+defaults:
+  - coco
+
+name: coco_val
+
+dict_nested_frames: #  'train2017', 'val2017'
+  val2017:
+
+subset_fraction: 1. #0.05

@@ -1,0 +1,86 @@
+defaults:
+  - pascal3d
+
+modalities:
+    - 'rgb'
+    - 'category'
+    - 'mask'
+    - 'kpts'
+    - 'cam_intr4x4'
+    - 'cam_tform4x4_obj'
+    - 'size'
+    - 'bbox'
+    #- 'mesh'
+
+name: ood_cv
+class_name: OOD_CV
+
+path_raw: ${platform.path_datasets_raw}/OOD_CV
+path_preprocess: ${platform.path_datasets_preprocess}/OOD_CV_Preprocess
+
+url_pascal3d_occ_script: https://raw.githubusercontent.com/Angtian/OccludedPASCAL3D/master/download_FG.sh
+
+rpath_pascal3d_raw: PASCAL3D+_release1.1
+path_pascal3d_raw: ${platform.path_datasets_raw}/${.rpath_pascal3d_raw}
+
+
+
+dict_nested_frames:
+#     context:
+#        car:
+
+# skipped due to neg px/py
+#          - google_context_bus_bus_fire_bus_fire_naver_0057
+#          - google_context_car_car_lake_car_lake_google_0030
+#          - google_context_car_car_lake_car_lake_google_0001
+#          - google_context_car_car_lake_car_lake_google_0023
+#          - baidu_motorbike_pose_motorbike_thundershower_google_0016
+#          - baidu_motorbike_pose_26
+#          - baidu_motorbike_pose_8
+#          - google_shape_car_others_aeroplane_car_naver_0082
+#          - baidu_car_shape_car_sandstorm_naver_0039
+#          - baidu_car_shape_car_trick_naver_0087
+#          - baidu_diningtable_weather_12_copy
+#          - baidu_car_weather_141
+#          - baidu_bicycle_weather_30
+#          - baidu_bus_weather_41
+
+#root_path: data/OOD_CV_NeMo
+
+
+#pad_texture: false
+#single_mesh: true
+#training_only: false
+#evaluation_only: false
+#augment_by_dist: false
+#prepare_mode: first
+#center_and_resize: true
+#skip_3d_anno: false
+
+image_sizes:
+    aeroplane: [320, 672]
+    bicycle: [608, 608]
+    boat: [384, 672]
+    bus: [320, 736]
+    chair: [608, 384]
+    car: [256, 672]
+    diningtable: [384, 800]
+    motorbike: [512, 512]
+    sofa: [352, 736]
+    train: [256, 608]
+
+nuisances:
+    - context
+    - pose
+    - shape
+    - texture
+    - weather
+
+occ_level: 0
+enable_cache: true
+weighted: true
+remove_no_bg: 8
+transforms:
+    - class_name: nemo.datasets.transforms.ToTensor
+
+sampler: None

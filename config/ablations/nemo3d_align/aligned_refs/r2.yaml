@@ -1,0 +1,7 @@
+# @package _global_
+defaults:
+  - /ablations/nemo3d_align/aligned_refs/_default
+
+ablation_name_nemo3d_align_aligned_refs: ref2
+
+aligned_name_ref: '/r2'

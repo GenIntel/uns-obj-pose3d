@@ -1,0 +1,11 @@
+
+# @package _global_
+defaults:
+  - /ablations/epochs/_default
+
+ablation_name_nemo_inference: 'inf_use_only_rendered'
+
+method:
+  nemo:
+    inference:
+      only_use_rendered_inliers: True

@@ -1,0 +1,4 @@
+# @package _global_
+
+mesh_feats_dist_reduce_type: 'negdot_min' #'avg' 'min' 'min_avg'
+

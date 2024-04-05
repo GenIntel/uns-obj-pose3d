@@ -1,0 +1,22 @@
+name: coco
+class_name: COCO
+
+modalities:
+    - 'rgb'
+    - 'categories'
+    # - 'mask'
+
+path_raw: ${platform.path_datasets_raw}/COCO
+path_preprocess: ${platform.path_datasets_preprocess}/COCO_Preprocess
+
+
+
+setup:
+  enabled: False
+  override: False
+  remove_previous: False
+
+extract_meta:
+  enabled: False
+  override: False
+  remove_previous: False

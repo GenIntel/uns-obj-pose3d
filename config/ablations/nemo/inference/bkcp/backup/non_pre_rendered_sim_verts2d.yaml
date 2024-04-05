@@ -1,0 +1,11 @@
+# @package _global_
+defaults:
+  - /ablations/nemo_inference@: default
+
+ablation_name: inference_non_pre_rendered_sim_verts2d
+
+method:
+    nemo:
+      inference:
+        pre_rendered: False
+        sim_feats_mesh_with_image: 'verts2d' # 'rendered', 'verts2d'

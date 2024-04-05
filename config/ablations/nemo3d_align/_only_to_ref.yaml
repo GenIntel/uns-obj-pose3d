@@ -1,0 +1,15 @@
+# @package _global_
+
+ablation_name: only_to_ref
+
+method:
+  nemo:
+    use_gt: True
+    use_only_first_reference: True
+    dist_appear_weight: 0.5
+    use_appear_argmin: False
+    global_optimization_steps: 1
+    categories: ${categories}
+    aligned_name: 'latest'
+    aligned_store_only_similar: True
+

@@ -1,0 +1,11 @@
+# @package _global_
+defaults:
+  - /ablations/nemo_backbone@: _default
+  - override /methods/model@method.nemo.model: resnet50_unfrozen
+
+ablation_name: resnet50_unfrozen
+
+method:
+  nemo:
+    checkpoint: ${platform.path_exps}/08-31_18-25-15_Pascal3D_NeMo_resnet50_unfrozen_slurm/nemo.ckpt
+

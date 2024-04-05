@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - override /datasets@train_dataset: co3d_55s_train #  co3d_55s_train, pascal3d_train
+
+ablation_name: uniform_train_co3d_55s
+
+method:
+    nemo:
+        train:
+            epochs: 10
+train: True
+test: True

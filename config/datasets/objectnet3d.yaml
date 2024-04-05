@@ -1,0 +1,58 @@
+name: objectnet3d
+class_name: ObjectNet3D
+
+modalities:
+    - 'rgb'
+    - 'rgb_mask'
+    - 'category'
+    - 'category_id'
+    - 'mask'
+    - 'cam_intr4x4'
+    - 'cam_tform4x4_obj'
+    - 'size'
+    - 'bbox'
+    - 'depth'
+  # - 'mesh'
+
+path_raw: ${platform.path_datasets_raw}/ObjectNet3D
+path_preprocess: ${platform.path_datasets_preprocess}/ObjectNet3D_Preprocess
+
+setup:
+  enabled: False
+  override: False
+  remove_previous: False
+
+extract_meta:
+  enabled: False
+  override: False
+  remove_previous: False
+
+
+categories:
+#  - 'car'
+
+preprocess:
+  subset_category_names_unique:
+    enabled: True
+    override: False
+    remove_previous: False
+  cuboid:
+    enabled: True
+    override: False
+    remove_previous: False
+  mask:
+    enabled: True
+    override: False
+    remove_previous: False
+  depth:
+    enabled: True
+    override: False
+    remove_previous: False
+
+
+filter_frames_categorical: True # for preprocessing subset_category_names_unique, set this to False
+
+path_cuboids: '${.path_preprocess}/cuboids'
+
+#dict_nested_frames:
+#  val:

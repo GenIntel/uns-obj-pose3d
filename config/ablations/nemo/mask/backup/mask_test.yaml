@@ -1,0 +1,12 @@
+# @package _global_
+defaults:
+  - /ablations/score/mask/_default
+
+ablation_name_score_mask: 'mask_test'
+
+method:
+  nemo:
+    train:
+      use_mask_object: False
+    inference:
+      use_mask_object: True

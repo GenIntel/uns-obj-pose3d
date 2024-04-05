@@ -1,0 +1,14 @@
+# @package _global_
+defaults:
+  - /ablations/nemo/epochs/_default
+
+ablation_name_nemo_epochs: 'epochs50'
+
+method:
+  nemo:
+    checkpoint: ${platform.path_exps}/12-08_10-37-47_Pascal3D_NeMo_epochs50_slurm/nemo.ckpt
+    # 12-08_10-37-47_Pascal3D_NeMo_epochs50_slurm
+    # 12-08_10-38-10_Pascal3D_NeMo_epochs100_slurm
+    # 12-08_10-37-58_Pascal3D_NeMo_epochs150_slurm
+    train:
+      epochs: 50

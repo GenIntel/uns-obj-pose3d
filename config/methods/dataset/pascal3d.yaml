@@ -1,0 +1,45 @@
+# checkpoint: ${platform.path_exps}/NeMo-Classification/2022_09_26/classification_saved_model_199.pth
+# checkpoint_old: ${platform.path_exps}/NeMo-Classification/classification_saved_model_199.pth
+
+train:
+    # val: False
+    epochs: 200 # artur: 200  wufei: 800
+    dataloader:
+        num_workers: 4
+        batch_size: 12 # artur: 24/32 wufei: 108
+        pin_memory: True
+
+    transform:
+        class_name: SequentialTransform
+        transforms:
+            -   class_name: RandomCenterZoom3D
+                apply_txtr: False
+                config: ${texture_dataset}
+                W: 512
+                H: 512
+                scale_with_mask: 1.
+                scale_selection: 'shorter' # 'shorter' 'larger' 'separate'
+                scale_min: 0.8
+                scale_max: 1.2
+                center_rel_shift_xy_min:
+                  - -0.
+                  - -0.
+                center_rel_shift_xy_max:
+                  - +0.
+                  - +0.
+            - class_name: RGB_Random
+test:
+    dataloader:
+        num_workers: 4
+        batch_size: 4
+        pin_memory: True
+    transform:
+        class_name: CenterZoom3D
+        W: 512
+        H: 512
+        scale:
+        scale_with_mask: 1.
+        center_rel_shift_xy:
+            - -0.
+            - -0.
+

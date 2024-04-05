@@ -1,0 +1,21 @@
+link: torque
+shared_home_with_local: False
+path_od3d: /home/sommerl/od3d
+pull_od3d: True
+pull_od3d_submodules: True
+install_od3d: True
+#path_exps: /misc/lmbraid19/sommerl/exps
+path_datasets_raw: /misc/lmbraid19/sommerl/datasets
+path_datasets_preprocess: /misc/lmbraid19/sommerl/datasets # for student: /misc/student/srinivap/datasets_preprocess
+path_exps: /misc/lmbraid19/sommerl/exps
+path_cuda: /misc/software/cuda/cuda-11.7 # should be cuda-11.7
+path_home: /home/sommerl
+url_od3d: git@github.com:Generative-Vision-Robust-Learning/od3d.git
+username: sommerl
+queue: default-cpu # default-cpu, student
+gpu_count: 1
+gpu_mem_in_gb: 20
+cpu_count: 8
+ram: "20gb"
+walltime: "24:00:00"
+hostlist: #  "^shuri" "^chip+chap+trixi", note: gpu_mem_in_gb should be None in this case

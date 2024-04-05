@@ -1,0 +1,5 @@
+# @package _global_
+defaults:
+  - override /methods/optimizer@method.nemo.train.optimizer: sgd
+
+ablation_name: optim_sgd

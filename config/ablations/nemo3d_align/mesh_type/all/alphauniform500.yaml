@@ -1,0 +1,3 @@
+# @package _global_
+
+mesh_type: 'alphauniform500' # 'alphawrap500' 'alpha500' 'convex500', 'voxel500' 'poisson500', 'alpha500'

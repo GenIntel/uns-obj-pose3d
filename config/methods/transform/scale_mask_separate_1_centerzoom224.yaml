@@ -1,0 +1,10 @@
+class_name: CenterZoom3D
+W: 224
+H: 224
+scale:
+scale_with_mask: 1.
+scale_selection: 'separate' # 'shorter' 'larger' 'separate'
+center_use_mask: False
+center_rel_shift_xy:
+  - -0.
+  - -0.

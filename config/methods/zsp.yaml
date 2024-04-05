@@ -1,0 +1,15 @@
+defaults:
+  - /methods/transform@train.transform: scale_mask_separate_1_centerzoom224
+  - /methods/transform@test.transform: scale_mask_separate_1_centerzoom224
+  - /methods/dataloader@train.dataloader: default
+  - /methods/dataloader@test.dataloader: default
+
+name: zsp
+class_name: ZSP
+
+train:
+  dataloader:
+    batch_size: 12
+test:
+  dataloader:
+    batch_size: 4

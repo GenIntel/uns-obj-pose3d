@@ -1,0 +1,9 @@
+# @package _global_
+defaults:
+  - override /methods/model@method.nemo.model: dinov2_frozen
+  # - override /datasets@train_datasets.labeled: co3d_3s_train #  co3d_55s_train, pascal3d_train
+
+ablation_name: dinov2_frozen
+
+train: False
+test: True

@@ -1,0 +1,56 @@
+defaults:
+  - co3d_no_zsp_5s_labeled_ref
+
+name: co3d_no_zsp_5s_labeled_ref_cuboid
+
+mesh_type: 'cuboid500' # 'cuboid500' 'convex500', 'voxel500' 'poisson500', 'alpha500', 'cuboid1000'
+#
+#frames_count_max_per_sequence: 4
+#
+#
+#modalities:
+#    - 'size'
+#    - 'category'
+#    - 'category_id'
+#    - 'cam_intr4x4'
+#    - 'cam_tform4x4_obj'
+#    - 'rays_center3d'
+#    - 'category'
+#    - 'rgb'
+#    - 'rgb_mask'
+#    - 'mask'
+#    - 'sequence_name_unique'
+#    - 'sequence'
+#    - 'mesh'
+#
+#
+#categories:
+##  - bicycle
+##  - laptop
+##  - truck
+##  - train
+##  - teddybear
+##  - car
+##  - bus
+##  - motorcycle
+##  - keyboard
+##  - handbag
+#  - remote
+##  - airplane
+##  - toilet
+##  - hairdryer
+#  - mouse
+##  - toaster
+##  - hydrant
+##  - chair
+##  - laptop
+##  - book
+##  - backpack
+##  - cellphone # from cellphone on, no zsp categories
+##  - microwave
+##  - bench
+##  - bottle
+##  - couch
+#  - cup
+##  - suitcase
+##  - tv

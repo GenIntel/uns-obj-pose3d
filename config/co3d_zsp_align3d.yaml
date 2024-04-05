@@ -1,0 +1,80 @@
+defaults:
+  - logger: wandb
+  - methods@method.zsp: zsp
+  - datasets@train_datasets.src: co3dv1_zsp_10s #  co3dv1_zsp_10s co3d_no_zsp_5s_labeled_ref
+  - datasets@train_datasets.labeled: co3dv1_zsp_10s # co3dv1_zsp_10s co3d_no_zsp_5s_labeled_ref
+  - datasets@val_datasets.main:
+  - datasets@test_datasets.co3d: co3dv1_zsp_10s # co3dv1_zsp_10s co3d_no_zsp_5s_labeled_ref
+  - platform@platform_local: local
+  - datasets@texture_dataset: dtd
+  - platform: local
+
+categories: # bicycle hydrant motorcycle teddybear toaster
+  - bicycle
+  - truck
+  - train
+  - teddybear
+  - car
+  - bus
+  - motorcycle
+  - keyboard
+  - handbag
+  - remote
+  - airplane
+  - toilet
+  - hairdryer
+  - mouse
+  - toaster
+  - hydrant
+  - chair
+  - laptop
+  - book
+  - backpack
+
+## note all modalities requried for zsp
+modalities:
+    - 'size'
+    - 'category'
+    - 'category_id'
+    - 'cam_intr4x4'
+    - 'cam_tform4x4_obj'
+    - 'rays_center3d'
+    - 'category'
+    - 'rgb'
+    - 'rgb_mask'
+    - 'mask'
+    - 'sequence_name_unique'
+    - 'sequence'
+    - 'depth'
+    - 'depth_mask'
+    # - 'mesh'
+
+metrics:
+  - metricA
+  - metricB
+
+train_datasets:
+  src:
+    categories: ${categories}
+    modalities: ${modalities}
+  labeled:
+    categories: ${categories}
+    modalities: ${modalities}
+
+val_datasets:
+  main:
+    categories: ${categories}
+
+test_datasets:
+  co3d:
+    categories: ${categories}
+    modalities: ${modalities}
+
+method:
+  zsp:
+    aligned_name: 'zsp' #
+    use_gt_src: True
+    use_train_only_to_collect_target_data: False
+
+train: True
+test: True

@@ -1,0 +1,8 @@
+# @package _global_
+
+method:
+  nemo:
+    train:
+      use_mask_rgb: True
+      use_mask_object: False
+      use_mask_rendered_object: True

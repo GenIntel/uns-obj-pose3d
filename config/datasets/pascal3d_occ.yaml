@@ -1,0 +1,24 @@
+defaults:
+  - pascal3d
+
+modalities:
+    - 'rgb'
+    - 'category'
+    - 'mask'
+    - 'kpts'
+    - 'cam_intr4x4'
+    - 'cam_tform4x4_obj'
+    - 'size'
+    - 'bbox'
+    #- 'mesh'
+
+name: pascal3d_occ
+class_name: Pascal3D_Occ
+
+path_raw: ${platform.path_datasets_raw}/PASCAL3D_Occ
+path_preprocess: ${platform.path_datasets_preprocess}/PASCAL3D_OccPreprocess
+
+url_pascal3d_occ_script: https://raw.githubusercontent.com/Angtian/OccludedPASCAL3D/master/download_FG.sh
+
+rpath_pascal3d_raw: PASCAL3D+_release1.1
+path_pascal3d_raw: ${platform.path_datasets_raw}/${.rpath_pascal3d_raw}

@@ -1,0 +1,9 @@
+# @package _global_
+
+val_datasets:
+  co3d_zsp:
+    skip: False
+
+test_datasets:
+  co3d_zsp:
+    skip: False

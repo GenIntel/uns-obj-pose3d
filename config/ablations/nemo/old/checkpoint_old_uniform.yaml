@@ -1,0 +1,66 @@
+# @package _global_
+defaults:
+  - override /methods/model@method.nemo.model: resnet50_old
+
+#test_datasets:
+#    co3d:
+#      skip: True
+#      frames_count_max_per_sequence: 1 # 8
+#    pascal3d:
+#      skip: False
+#      subset_fraction: 0.01
+
+ablation_name: old_checkpoint_uniform_sampling
+method:
+  nemo:
+    checkpoint_old: ${platform.path_exps}/NeMo-Classification/classification_saved_model_199.pth
+    fpaths_meshes: ${test_datasets.pascal3d.fpaths_cuboids}
+    inference:
+      use_mask_object: True
+      pre_rendered: False
+      sample:
+        method: uniform # epnp3d2d uniform
+        uniform:
+          azim:
+            min: '0.'
+            max: math.pi * 2 - (math.pi * 2) / 12.
+            steps: 12
+
+          elev:
+            min: -math.pi / 6
+            max: math.pi / 3
+            steps: 4
+
+          theta:
+            min: -math.pi / 6
+            max: math.pi / 6
+            steps: 3
+      optimizer:
+        beta0: 0.4
+        beta1: 0.6
+        lr: 2e-2 # 2e-2 5e-3 5e-2
+        epochs: 30 # 30
+
+    test:
+      visualize:
+        down_sample_rate: 4.
+        count_best: 3
+        count_worst: 3
+        count_rand: 1
+
+      dataloader:
+        num_workers: 4
+        batch_size: 1
+        pin_memory: False
+      transform:
+          W: 800 # 800 512
+          H: 640 # 640 512
+          scale_with_mask: #  0.70 # ensures that mask width or height fills 70% of the image
+          scale:
+          scale_with_dist: 5.
+  #        dist: 25. # 5. (scale_normalized_to_real) * 5. (default distance used)
+  #        center3d: [0., 0., 0.] #  None
+
+train: False
+test: True
+

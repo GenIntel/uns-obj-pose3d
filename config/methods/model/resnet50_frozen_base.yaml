@@ -1,0 +1,16 @@
+backbone:
+  class_name: ResNet
+  weights: 'imagenet1k_v1' # 'imagenet1k_v2' 'imagenet1k_v1' 'none'
+  downsample_rate: 16 # 8, 14, 16,
+  freeze: True
+  layers_returned: [4, 3, 2,] # always start with depest layer... 4x64 ,3x32, 2x16, 1x8
+head:
+  class_name: ResNet
+  block_type: 'bottleneck' # 'bottleneck', 'basic'
+  conv_blocks:
+    out_dims: [] #  [ 512, 512, 128 ]
+    strides: [] #  [ 1, 1, 1 ]
+    pre_upsampling: [] # [1., 1., 2.]
+  fully_connected:
+    out_dim: # None means that there is no linear layer
+  normalize: True

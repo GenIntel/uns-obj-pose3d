@@ -1,0 +1,15 @@
+backbone:
+  class_name: ResNetOld
+  downsample_rate: 8 # actually we usually use 8
+  freeze: False
+head:
+  class_name: ResNet
+  block_type: 'bottleneck' # 'bottleneck', 'basic'
+  conv_blocks:
+    out_dims: []
+    strides: []
+    pre_upsampling: []
+  fully_connected:
+    out_dim: # None means that there is no linear layer
+  normalize: False
+

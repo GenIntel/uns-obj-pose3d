@@ -1,0 +1,17 @@
+
+backbone:
+  class_name: SAM
+  sam_checkpoint: .cache/sam_vit_h_4b8939.pth # sam_vit_l_0b3195.pth sam_vit_b_01ec64.pth
+  model_type: vit_h
+  freeze: True
+
+head:
+#  class_name: ResNet
+#  block_type: 'bottleneck' # 'bottleneck', 'basic'
+#  conv_blocks:
+#    out_dims: [] #  [ 512, 512, 128 ]
+#    strides: [] #  [ 1, 1, 1 ]
+#    pre_upsampling: [] # [1., 1., 2.]
+#  fully_connected:
+#    out_dim: # None means that there is no linear layer
+#  normalize: False

@@ -1,0 +1,23 @@
+# @package _global_
+ablation_name: old_checkpoint_ransac_sampling
+method:
+    nemo:
+        checkpoint_old: ${platform.path_exps}/NeMo-Classification/classification_saved_model_199.pth
+        fpaths_meshes: ${test_datasets.pascal3d.fpaths_cuboids}
+        inference:
+            sample:
+                method: epnp3d2d # epnp3d2d uniform
+            optimizer:
+                beta0: 0.4
+                beta1: 0.6
+                lr: 2e-2 # 5e-3 5e-2
+                epochs: 30 # 30
+        test:
+            transform:
+                W: 800 # 800 512
+                H: 640 # 640 512
+                dist: 25. # 5. (scale_normalized_to_real) * 5. (default distance used)
+                center3d: [0., 0., 0.] #  None
+
+train: False
+test: True

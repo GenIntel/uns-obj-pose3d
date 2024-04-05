@@ -1,0 +1,3 @@
+local_dir: ${platform.path_exps}
+use_wandb: True
+wandb_project_name: NeMo

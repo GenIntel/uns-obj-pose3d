@@ -1,0 +1,106 @@
+# @package _global_
+defaults:
+  #- /datasets@val_datasets.pascal3d: pascal3d_val
+  #- /datasets@val_datasets.objectnet3d: objectnet3d_val
+  - /datasets@test_datasets.pascal3d: pascal3d_test
+  - /datasets@test_datasets.objectnet3d: objectnet3d_test
+  - override /datasets@train_datasets.labeled: co3d_no_zsp_5s_labeled_ref # co3d_5s_no_zsp_labeled co3d_50s_no_zsp co3dv1_50s_no_zsp co3dv1_10s_zsp_unlabeled co3d_3s_no_zsp
+  - override /datasets@train_datasets.src: co3d_no_zsp_5s_labeled_ref # co3d_5s_no_zsp_labeled co3d_50s_no_zsp co3dv1_50s_no_zsp co3dv1_10s_zsp_unlabeled co3d_3s_no_zsp
+
+  #- override /datasets@val_datasets.main:  #
+  #- override /datasets@test_datasets.co3d:  # co3d_5s_no_zsp_labeled
+
+ablation_name_zsp: cross_pascal3d_objectnet3d
+ablation_name: $ablation_name_zsp
+
+modalities:
+    - 'size'
+    - 'category'
+    - 'category_id'
+    - 'cam_intr4x4'
+    - 'cam_tform4x4_obj'
+    - 'rays_center3d'
+    - 'category'
+    - 'rgb'
+    - 'rgb_mask'
+    - 'mask'
+    - 'sequence_name_unique'
+    - 'sequence'
+    - 'depth'
+    - 'depth_mask'
+    # - 'mesh'
+
+modalities_pascal3d_objectnet3d:
+    - 'rgb'
+    - 'rgb_mask'
+    - 'category'
+    - 'category_id'
+    - 'mask'
+    - 'cam_intr4x4'
+    - 'cam_tform4x4_obj'
+    - 'size'
+    - 'bbox'
+    - 'depth'
+    - 'depth_mask'
+  # - 'mesh'
+
+categories:
+  - bicycle
+  - truck
+  - train
+  - teddybear
+  - car
+  - bus
+  - motorcycle
+  - keyboard
+  - handbag
+  - remote
+  - airplane
+  - toilet
+  - hairdryer
+  - mouse
+  - toaster
+  - hydrant
+  - chair
+  - laptop
+  - book
+  - backpack
+  - cellphone # from cellphone on, no zsp categories
+  - microwave
+  - bench
+  - bottle
+  - couch
+  - cup
+  - suitcase
+  - tv
+
+method:
+  zsp:
+    use_gt_src: True
+    use_train_only_to_collect_target_data: True
+
+
+train_datasets:
+  labeled:
+    categories: ${categories}
+    modalities: ${modalities}
+  src:
+    categories: ${categories}
+    modalities: ${modalities}
+
+test_datasets:
+  pascal3d:
+    subset_fraction: 0.001
+    skip: False
+    categories: ${categories}
+    modalities: ${modalities_pascal3d_objectnet3d}
+  objectnet3d:
+    subset_fraction: 0.001
+    skip: False
+    categories: ${categories}
+    modalities: ${modalities_pascal3d_objectnet3d}
+  co3d:
+    skip: True
+
+train: True
+test: True

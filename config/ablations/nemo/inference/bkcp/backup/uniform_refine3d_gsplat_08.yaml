@@ -1,0 +1,9 @@
+# @package _global_
+defaults:
+  - /ablations/nemo/inference/_default
+
+method:
+  nemo:
+    meshes_gaussian_splat_enabled: True
+    meshes_gaussian_splat_opacity: 1.
+    meshes_gaussian_splat_pts3d_size_rel_to_neighbor_dist: 0.8 # 0.1

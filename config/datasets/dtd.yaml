@@ -1,0 +1,25 @@
+name: dtd
+class_name: DTD
+
+modalities:
+    - 'rgb'
+    - 'size'
+
+path_raw: ${platform.path_datasets_raw}/DTD
+path_preprocess: ${platform.path_datasets_preprocess}/DTD_Preprocess
+
+
+setup:
+  enabled: False
+  override: False
+  remove_previous: False
+
+extract_meta:
+  enabled: False
+  override: False
+  remove_previous: False
+
+
+dict_nested_frames:
+  val:
+  train:
