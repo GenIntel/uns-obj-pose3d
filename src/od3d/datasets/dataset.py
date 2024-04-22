@@ -776,7 +776,7 @@ class OD3D_SequenceDataset(OD3D_Dataset):
             sequences.append(self.get_sequence_by_name_unique(name_unique=sequence_name_unique))
         return sequences
 
-    def save_sequences_as_video(self, H=1080, W=1920, fps=5, fpath_video=None, imgs_count=60):
+    def save_sequences_as_video(self, H=1080, W=1920, fps=15, fpath_video=None, imgs_count=150):
 
         if fpath_video is None:
             fpath_video = Path(f'{self.name}.avi')
@@ -798,7 +798,7 @@ class OD3D_SequenceDataset(OD3D_Dataset):
         from od3d.cv.visual.resize import resize
         for sequence in tqdm(sequences):
             cams_tform4x4_world, cams_intr4x4, cams_imgs = sequence.read_cams(cams_count=imgs_count)
-            cams_imgs = resize(torch.stack(cams_imgs, dim=0), H_out=H_cell, W_out=W_cell)
+            cams_imgs = resize(torch.stack(cams_imgs, dim=0), H_out=H_cell, W_out=W_cell)[:imgs_count]
             tstamp_category_sequence_imgs[:len(cams_imgs), sequence.category_id, category_sequences_count[sequence.category]] = cams_imgs
             category_sequences_count[sequence.category] += 1
 
@@ -916,6 +916,9 @@ class OD3D_SequenceDataset(OD3D_Dataset):
 
                 for modality in modalities:
                     src_sequence_mesh = src_sequence.read_mesh()
+                    # from od3d.cv.geometry.transform import transf4x4_from_rot3d, transf3d_broadcast
+                    # _tform4x4 = transf4x4_from_rot3d(torch.Tensor([0., 0, np.pi]))
+                    # src_sequence_mesh.verts = transf3d_broadcast(pts3d= src_sequence_mesh.verts, transf4x4=_tform4x4)
 
                     if modality == 'ncds':
                         src_sequence_mesh.rgb = src_sequence_mesh.verts_ncds

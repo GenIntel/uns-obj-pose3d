@@ -33,6 +33,10 @@ def rot6d_to_rot3x3(rot6d: torch.Tensor):
     _rot3x3 = rotation_6d_to_matrix(rot6d.reshape(-1, 6))
     return _rot3x3.reshape(rot6d_shape[:-1] + torch.Size([3, 3]))
 
+def transf4x4_from_rot3d(rot3d: torch.Tensor()):
+    _rot3x3 = pytorch3d.transforms.axis_angle_to_matrix(rot3d)
+    return transf4x4_from_rot3x3(_rot3x3)
+
 def so3_log_map(so3_3x3: torch.Tensor):
     so3_exp_shape = so3_3x3.shape
 

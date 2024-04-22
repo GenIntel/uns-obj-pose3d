@@ -141,7 +141,7 @@ class OD3D_Sequence(OD3D_FrameModalitiesMixin, OD3D_Object, Dataset):
         if cams_count == -1:
             step_size = 1
         else:
-            step_size = (frames_count // cams_count) + 1
+            step_size = max((frames_count // cams_count), 1)
         for c in range(0, frames_count, step_size):
             frame = self.get_frame_by_index(c)
             cams_tform4x4_world.append(
