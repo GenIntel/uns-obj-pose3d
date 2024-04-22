@@ -17,6 +17,9 @@ import torchvision
 import open3d as o3d
 import numpy as np
 from od3d.cv.geometry.transform import inv_tform4x4, tform4x4
+import matplotlib.pyplot as plt
+from matplotlib.colors import Normalize
+from matplotlib.cm import ScalarMappable
 
 DEFAULT_CAM_TFORM_OBJ = torch.Tensor([[1., 0., 0., 0.],
                                       [0., 0., -1., 0.],
@@ -123,6 +126,70 @@ def show_scene2d(
                 ax[i].legend(pts2d_names[i])
     plt.show()
 
+def dist_to_blue_yellow(dist, normalize=True):
+    """
+        Args:
+            dist: torch.Tensor (N1, N2, N3, ...)
+            max_dist: float
+        Returns
+            blue_yellow: torch.Tensor (3, N1, N2, N3, ...)
+    """
+    if normalize:
+        cbar_max = dist.max()
+        cbar_min = dist.min()
+        dist_normalized = (dist - cbar_min) / (cbar_max - cbar_min)
+    else:
+        dist_normalized = dist.clone()
+    return torch.stack([dist_normalized, dist_normalized, 1. - dist_normalized], dim=0)
+
+def get_scalar_map(vmin=0., vmax=1., cmin=[0., 0., 1.],  cmax= [1., 1., 0.], cmap=None):
+    import matplotlib.colors as mcolors
+    colors = [cmin, cmax]
+    positions = [0., 1.]
+
+    # Create the colormap
+    if cmap is None:
+        # cmap = mcolors.Colormap()
+        cmap = mcolors.LinearSegmentedColormap.from_list('my_colormap', list(zip(positions, colors)))
+
+    norm = Normalize(vmin=vmin, vmax=vmax)
+    scalar_map = ScalarMappable(norm=norm, cmap=cmap)
+    return scalar_map
+
+def get_cbar_img_from_scalar_map(height, scalar_map, label=None):
+
+    """
+from od3d.cv.visual.show import get_colormap
+from od3d.cv.visual.show import show_img
+a = get_colormap(300)
+show_img(a)
+    """
+    fig, ax = plt.subplots(figsize=(2, 10))
+    cbar = plt.colorbar(scalar_map, ax=ax)
+
+    if label is not None:
+        cbar.set_label(label)  # Customize colorbar label if needed
+
+    ax.set_visible(False)
+    ax.axis('off')
+    ax.margins(0)
+    fig.tight_layout(pad=0)
+
+    # Render the plot to a numpy array
+    fig.canvas.draw()
+    plot_array = np.array(fig.canvas.renderer.buffer_rgba())
+
+    plt.close(fig)
+
+    cbar_img = torch.Tensor(plot_array).permute(2, 0, 1)[:3] / 255.
+
+    from od3d.cv.visual.crop import crop_white_border_from_img
+    cbar_img = crop_white_border_from_img(cbar_img, resize_to_orig=False)
+
+    cbar_img = resize(cbar_img, scale_factor=height / cbar_img.shape[1])
+
+    return cbar_img
+
 def show_scene(cams_tform4x4_world: Union[torch.Tensor, List[torch.Tensor]]=None,
                cams_intr4x4: Union[torch.Tensor, List[torch.Tensor]]=None,
                cams_imgs: Union[torch.Tensor, List[torch.Tensor]]=None,
@@ -150,10 +217,13 @@ def show_scene(cams_tform4x4_world: Union[torch.Tensor, List[torch.Tensor]]=None
                W=1980,
                fps=10,
                pts3d_size=10.,
-               background_color=(0.9, 0.9, 0.9),
+               background_color=(1., 1., 1.),
                device='cpu',
                meshes_as_wireframe=False,
-               crop_white_border=False):
+               crop_white_border=False,
+               add_cbar=False,
+               cbar_max=1.,
+               cbar_min=0.):
     """
     Args:
         cams_tform4x4_world (Union[torch.Tensor, List[torch.Tensor]]): (Cx4x4) or List(4x4)
@@ -374,6 +444,8 @@ def show_scene(cams_tform4x4_world: Union[torch.Tensor, List[torch.Tensor]]=None
             # view_control = vis.get_view_control()
             if return_visualization or fpath is not None:
                 imgs = []
+                if add_cbar:
+                    cbar_img = get_cbar_img_from_scalar_map(height=H, scalar_map=get_scalar_map(vmax=cbar_max, vmin=cbar_min))
                 from od3d.io import is_fpath_video
                 from od3d.cv.geometry.transform import get_cam_tform4x4_obj_for_viewpoints_count, transf3d, tform4x4_broadcast
                 cams_new_tform4x4_obj = get_cam_tform4x4_obj_for_viewpoints_count(viewpoints_count=viewpoints_count, dist=0.,
@@ -406,6 +478,9 @@ def show_scene(cams_tform4x4_world: Union[torch.Tensor, List[torch.Tensor]]=None
                     if crop_white_border:
                         from od3d.cv.visual.crop import crop_white_border_from_img
                         img = crop_white_border_from_img(img, resize_to_orig=True)
+
+                    if add_cbar:
+                        img[:, -cbar_img.shape[1]:, -cbar_img.shape[2]:] = cbar_img
                     imgs.append(img)
 
 

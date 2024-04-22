@@ -907,24 +907,45 @@ class OD3D_SequenceDataset(OD3D_Dataset):
                     from od3d.cv.select import batched_index_select
                     src_cyclic_dist[
                         batched_index_select(input=mesh_feats_dist, index=argmin_ref_from_src[..., None], dim=1).isinf()[:,
-                        0]] = torch.inf
+                        0]] = src_cyclic_dist.max() # torch.inf
                     ref_cyclic_dist[
                         batched_index_select(input=mesh_feats_dist.T, index=argmin_src_from_ref[..., None], dim=1).isinf()[
-                        :, 0]] = torch.inf
+                        :, 0]] = ref_cyclic_dist.max() # torch.inf
                     cycle_weight = torch.exp(-((src_cyclic_dist / cyclic_weight_temp)))
 
 
                 for modality in modalities:
+                    add_cbar = False
+                    cbar_max = 1.
+                    cbar_min = 0.
                     src_sequence_mesh = src_sequence.read_mesh()
-                    # from od3d.cv.geometry.transform import transf4x4_from_rot3d, transf3d_broadcast
-                    # _tform4x4 = transf4x4_from_rot3d(torch.Tensor([0., 0, np.pi]))
-                    # src_sequence_mesh.verts = transf3d_broadcast(pts3d= src_sequence_mesh.verts, transf4x4=_tform4x4)
+                    from od3d.cv.visual.show import dist_to_blue_yellow
+                    from od3d.cv.geometry.transform import transf4x4_from_rot3d, transf3d_broadcast
+                    _tform4x4 = transf4x4_from_rot3d(torch.Tensor([0., 0, np.pi]))
+                    src_sequence_mesh.verts = transf3d_broadcast(pts3d= src_sequence_mesh.verts, transf4x4=_tform4x4)
 
                     if modality == 'ncds':
                         src_sequence_mesh.rgb = src_sequence_mesh.verts_ncds
                     elif modality == 'nn_app':  #  'nn_geo', 'nn_app', 'cycle_weight', 'nn_app_cycle_weight'
                         src_sequence_mesh.rgb = ref_sequence_mesh.verts_ncds[argmin_ref_from_src].clone()
-                                           #  * (src_cyclic_dist != torch.inf).float()[:, None]
+
+
+                    elif modality == 'nn_app_dist':
+                        dist = (src_sequence_mesh.verts_ncds - ref_sequence_mesh.verts_ncds[argmin_ref_from_src].clone()).norm(dim=-1) / dist_src_geo_max
+                        add_cbar = True
+                        cbar_max = dist.max()
+                        cbar_min = dist.min()
+                        src_sequence_mesh.rgb = dist_to_blue_yellow(dist, normalize=True).permute(1, 0)
+
+                    elif modality == 'nn_geo_dist':
+                        dist_geo = torch.cdist(src_sequence_mesh.verts[None,], ref_sequence_mesh.verts[None,]).detach()[0] / dist_src_geo_max
+                        dist_geo_min = dist_geo.min(dim=-1).values.clone().clamp(0, 1)
+                        # logger.info(dist_geo_min)
+                        add_cbar= True
+                        cbar_max = dist_geo_min.max()
+                        cbar_min = dist_geo_min.min()
+                        src_sequence_mesh.rgb = dist_to_blue_yellow(dist_geo_min).permute(1, 0)
+
                     elif modality == 'nn_cycle':
                         src_sequence_mesh.rgb = src_sequence_mesh.verts_ncds[argmin_src_from_ref[argmin_ref_from_src]].clone()
                     elif modality == 'nn_app_cycle_weight':
@@ -932,9 +953,11 @@ class OD3D_SequenceDataset(OD3D_Dataset):
                     elif modality == 'nn_geo':
                         dist_geo = torch.cdist(src_sequence_mesh.verts[None,], ref_sequence_mesh.verts[None,]).detach()[0]
                         src_sequence_mesh.rgb = ref_sequence_mesh.verts_ncds[dist_geo.argmin(dim=-1)].clone()
-                    elif modality == 'cycle_weight':
-                        src_sequence_mesh.rgb = cycle_weight[:, None].repeat(1, 3) * 0.9
-
+                    elif modality == 'cycle_dist':
+                        add_cbar = True
+                        cbar_max = src_cyclic_dist.max()
+                        cbar_min = src_cyclic_dist.min()
+                        src_sequence_mesh.rgb = dist_to_blue_yellow(src_cyclic_dist).permute(1, 0) # [:, None].repeat(1, 3) * 0.9
                     if modality == 'ncds':
                         fpath = Path(f'{src_sequence.category}_{src_sequence.name}_ncds.webm')
                     else:
@@ -948,7 +971,7 @@ class OD3D_SequenceDataset(OD3D_Dataset):
                         else:
                             modality_categorical_ref_fpaths[modality][src_sequence.category][ref_sequence.name].append(fpath)
                     show_scene(meshes=[src_sequence_mesh], viewpoints_count=viewpoints_count,
-                               fpath=fpath, H=H, W=W)
+                               fpath=fpath, H=H, W=W, add_cbar=add_cbar, cbar_max=cbar_max, cbar_min=cbar_min)
 
         for modality in modalities:
             for category in tqdm(self.categories):
