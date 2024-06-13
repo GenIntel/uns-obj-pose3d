@@ -1,4 +1,16 @@
-## Object Detection 3D (OD3D)
+
+## [Unsupervised Learning of Category-Level 3D Pose from Object-Centric Videos [CVPR'24]](https://generative-vision-robust-learning.github.io/uns-obj-pose3d)
+
+```commandline
+@InProceedings{ Sommer_2024_CVPR, 
+ author    = {Sommer, Leonhard and Jesslen, Artur and Ilg, Eddy and Kortylewski, Adam}, 
+ title     = {Unsupervised Learning of Category-Level 3D Pose from Object-Centric Videos}, 
+ booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}, 
+ month     = {June}, 
+ year      = {2024}, 
+ pages     = {22787-22796} 
+ }
+```
 
 ### Install
 
