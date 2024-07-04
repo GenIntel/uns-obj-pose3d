@@ -1,5 +1,5 @@
 
-## [Unsupervised Learning of Category-Level 3D Pose from Object-Centric Videos [CVPR'24]](https://generative-vision-robust-learning.github.io/uns-obj-pose3d)
+## [Unsupervised Learning of Category-Level 3D Pose from Object-Centric Videos [CVPR'24]](https://genintel.github.io/uns-obj-pose3d)
 
 ```commandline
 @InProceedings{ Sommer_2024_CVPR, 
@@ -35,7 +35,7 @@ pip install -e .
 #### Install in Non-editable mode
 
 ```
-pip install git@github.com:Generative-Vision-Robust-Learning/od3d.git  
+pip install git@github.com:GenIntel/od3d.git  
 ```
 
 ### Configure 
